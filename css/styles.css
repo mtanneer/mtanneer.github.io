@@ -1,12 +1,6 @@
-/* body {
-    font-family: "Roboto", Arial, sans-serif;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 1.7;
-    color: #333333;
-    background: #fff;
-  } */
-
+/*-------------------------------------
+    BODY-HTML
+-------------------------------------*/
 :root {
     --background-color: #ffffff;
     --text-color: #000000;
@@ -14,30 +8,78 @@
     --nav-text-color: #333333;
 }
 
-[data-theme="dark"] {
-    --background-color: #333333;
-    --text-color: #ffffff;
-    --nav-background-color: #444444;
-    --nav-text-color: #f1f1f1;
-}
-
-body {
-    background-color: var(--background-color);
-    color: var(--text-color);
-    /* font-family: 'Inconsolata', monospace; */
-    /* font-family: "Roboto", Arial, sans-serif; */
-    /* font-family: "Courier New",Courier,monospace; */
-    font-family: "Courier Prime", monospace;
-    /* font-weight: 100; */
-    transition: background-color 0.3s, color 0.3s;
-}
-
 .container {
     max-width: 1200px; /* Maximum width of the container */
     margin: 0 auto; /* Center the container */
     padding: 0 20px; /* Add some padding to the sides */
+}
+
+.heading{
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 100;
+    padding-left: 20px;
+}
+.heading-about{
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 100;
+}
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: "Courier Prime", monospace;
+    font-weight: 100;
+    transition: background-color 0.3s, color 0.3s;
+    flex: 1;
+    height: 100%;
+}
+
+.content{
+    padding-left: 20px;
+    /* width: 60%; Adjut the width to control how much space the text takes */
+    /* margin-right: 20px; Add some space between the text and the image */
+    text-align: justify;
+}
+.content-about{
+    padding-left: 20px;
+    width: 60%; /* Adjust the width to control how much space the text takes */
+    margin-right: 20px; /* Add some space between the text and the image */
+    text-align: justify;
+}
+.container-about {
+    display: flex;
+    align-items: flex-start; /* Align items to the top */
+    padding-top: 20px;
+  }
+.image {
+    width: 40%; /* Image container takes 40% of the width */
+    display: flex;
+    justify-content: center; /* Center the image horizontally */
+    align-items: center; /* Center the image vertically */
+}
+.image img {
+    max-width: 70%; /* Ensure the image scales correctly */
+    height: auto; /* Maintain the aspect ratio of the image */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Add a soft shadow for softer edges */
+    
+  }
+  
+/*-------------------------------------
+    LINKS
+-------------------------------------*/
+
+.links {
+    margin-top: 10px;
   }
 
+.links a {
+    display: inline-block;
+    margin-right: 10px;
+    text-decoration: underline;
+    color: #333; /* Adjust link color as needed */
+  }
+/*-------------------------------------
+    NAV-BAR
+-------------------------------------*/
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -52,7 +94,7 @@ body {
 .navbar-brand {
     font-family: "Courier New",Courier,monospace;
     font-size: 2em;
-    /* font-weight: bold; */
+    font-weight: 700;
 }
 
 .navbar-links {
@@ -77,18 +119,9 @@ body {
     color: var(--text-color);
 }
 
-.theme-switcher {
-    cursor: pointer;
-    padding: 5px 10px;
-    border: 1px solid var(--nav-text-color);
-    border-radius: 5px;
-}
-
-.theme-switcher:hover {
-    background-color: var(--nav-text-color);
-    color: var(--nav-background-color);
-}
-
+/*-------------------------------------
+    FOOTER
+-------------------------------------*/
 footer {
     text-align: center; /* Center the footer content */
     padding: 20px 0; /* Add padding to the top and bottom */
@@ -97,8 +130,10 @@ footer {
     font-size: 0.9em; /* Make the footer text a bit smaller */
     color: #666; /* Set a lighter color for the footer text */
   }
-  
-/* Responsive */
+
+/*-------------------------------------
+    RESPONSIVE
+-------------------------------------*/
 @media (max-width: 600px) {
     .navbar-links {
         flex-direction: column;
