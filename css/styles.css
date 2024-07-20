@@ -92,9 +92,11 @@ body {
 }
 
 .navbar-brand {
-    font-family: "Courier New",Courier,monospace;
+    /* font-family: "Source Code Pro",monospace; */
+    /* font-family: "Montserrat", "Courier New", monospace; */
+    font-family: "Roboto Mono","Courier New", courier;
     font-size: 2em;
-    font-weight: 700;
+    font-weight: 400;
 }
 
 .navbar-links {
@@ -107,6 +109,9 @@ body {
 
 .navbar-links li {
     display: inline;
+    /* font-family: 'Courier New', Courier, monospace; */
+    font-family: "Roboto Mono","Courier New", courier;
+    font-weight: 400;
 }
 
 .navbar-links a {
@@ -172,9 +177,9 @@ footer {
 
 .project-card img {
     width: 100%;
-    /* height: auto; */
     height: 200px; /* Fixed height */
-    object-fit: cover; /* Ensures the image covers the area without distortion */
+    /* Ensures the image covers the area without distortion */
+    object-fit: cover; 
 }
 
 .project-card h3 {

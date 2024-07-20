@@ -5,12 +5,15 @@
         <title>Projects</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Personal Webpage" />
-        <!-- <link rel="icon" type="image/png" href="assets/tab_logo.png"> -->
+        <link rel="icon" type="image/png" href="assets/tab_logo.png">
         <!-- <meta name="keywords" content="" /> -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Personal Webpage" />
         <meta name="author" content="Manas Tanneeru" />
         <link rel="stylesheet" href="../css/styles.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto+Mono:wght@100..700&display=swap" rel="stylesheet">
         <script src="../js/main.js"></script>
     </head>
 
@@ -42,13 +45,13 @@
                     <p class="project-description">Building a super light weight webpage</p>
                     <button class="read-more-btn" onclick="openModal('project2')">Read More</button>
                 </div>
-                <!-- <div class="project-card">
-                    <img src="../assets/DSC_1007.JPG" alt="Project Image">
-                    <h3>Project Title 3 </h3>
-                    <p class="project-description">Brief description of the project.</p>
-                    <button class="read-more-btn" onclick="openModal('project2')">Read More</button>
-                </div>
                 <div class="project-card">
+                    <img src="../assets/wordle-clone.png" alt="Project Image">
+                    <h3>Wordle Clone</h3>
+                    <p class="project-description">A terminal based clone of the popular word game <a href="https://www.nytimes.com/games/wordle/index.html" target="_blank">Wordle</a>.</p>
+                    <button class="read-more-btn" onclick="openModal('project3')">Read More</button>
+                </div>
+                <!-- <div class="project-card">
                     <img src="../assets/DSC_1007.JPG" alt="Project Image">
                     <h3>Project Title 4 </h3>
                     <p class="project-description">Brief description of the project.</p>
@@ -91,7 +94,6 @@
                     <h2>Webpage Build</h2>
                     <p>
                         After multiple failed attempts for finding a perfect templete, I resorted to making my own. Find instructions and source code in the Webpage below.
-                        
                     </p>
                     <div class="button-center">
                         <a href="https://github.com/mtanneer/mtanneer.github.io" class="visit-website-btn" target="_blank">Visit Website</a>
@@ -100,10 +102,12 @@
             </div>
             <div id="project3" class="modal">
                 <div class="modal-content">
-                    <span class="close-btn" onclick="closeModal('project1')">&times;</span>
-                    <h2>Project Title 3</h2>
-                    <p>Detailed overview of the project.</p>
-                    <a href="https://projectwebsite.com" class="visit-website-btn" target="_blank">Visit Website</a>
+                    <span class="close-btn" onclick="closeModal('project3')">&times;</span>
+                    <h2>Wordle Clone</h2>
+                    <p>A terminal based game made in Python cloning the popular word game Wordle. Uses very simple code structure and libraries. Find the source code and instuctions on the website.</p>
+                    <div class="button-center"> 
+                        <a href="https://github.com/mtanneer/Wordle-Clone" class="visit-website-btn" target="_blank">Visit Website</a>
+                    </div>
                 </div>
             </div>
             <div id="project4" class="modal">
