@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', (event) => {
-    const message = "";
+    const message = "Hello, Welcome to my Website. I'm Manas";
     const welcomeMessage = document.querySelector('.welcome-message');
     let index = 0;
 
