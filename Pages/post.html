@@ -30,20 +30,16 @@
             </nav>
         </header>
         <body class="content">
-            <h1 class="heading">Potential Blog Soon....</h1>
-
-            <div class="filtercontainer">
-                <label for="categoryFilter">Filter by Category:</label>
-                <select id="categoryFilter" class="styleddropdown">
-                    <option value="all">All</option>
-                    <option value="tech">Tech</option>
-                    <option value="lifestyle">Lifestyle</option>
-                </select>
+            <div id="postContent">
+                <h1 id="postTitle"></h1>
+                <p><strong>Date:</strong> <span id="postDate"></span></p>
+                <p><strong>Category:</strong> <span id="postCategory"></span></p>
+                <p id="postBody"></p>
             </div>
-            <!-- Blog Posts Container -->
-            <div id="blogPosts"></div>
+            
+            <a href="blog.html">Back to Blog</a>
 
-            <script src="../js/blog.js"></script>
+            <script src="../js/post.js"></script>
         </body>
         
         <footer>

@@ -290,6 +290,31 @@ footer {
     text-align: center;
 }
 
+.filter-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+
+.styleddropdown {
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid var(--box-shadow);
+    background-color: var(--accent);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    -moz-appearance: none; /* For Firefox */
+    -webkit-appearance: none; /* For Safari */
+    appearance: none; /* Hides default dropdown styles */
+}
+
+.styleddropdown:hover {
+    background-color: #000000;
+}
+
 /*-------------------------------------
     WELCOME-MESSAGE
 -------------------------------------*/

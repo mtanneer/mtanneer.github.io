@@ -1,0 +1,18 @@
+[
+    {
+        "id": "post1",
+        "title": "First Blog Post",
+        "date": "2025-02-20",
+        "category": "tech",
+        "excerpt": "This is a short summary of my first blog post.",
+        "content": "This is the full content of the first blog post. It explains various aspects of the topic in detail."
+    },
+    {
+        "id": "post2",
+        "title": "Second Blog Post",
+        "date": "2025-03-01",
+        "category": "lifestyle",
+        "excerpt": "This is a short summary of my second blog post.",
+        "content": "This is the full content of the second blog post. It provides insights into another interesting topic."
+    }
+]
