@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pacific Coast Family Itinerary — Seattle · Portland · San Francisco · June 11–July 3, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,400&family=Spectral:wght@300;400;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --evergreen:#1d3a30;
+    --evergreen-soft:#2c5244;
+    --moss:#5a7a5e;
+    --sand:#f6f1e6;
+    --sand-deep:#ece3d0;
+    --paper:#fbf8f1;
+    --rust:#b4502a;
+    --rust-soft:#d4895f;
+    --slate:#3a4a4e;
+    --fog:#8a948f;
+    --ink:#22302b;
+    --gold:#c08a2d;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--sand);
+    color:var(--ink);
+    font-family:'Spectral',Georgia,serif;
+    font-weight:400;
+    line-height:1.65;
+    font-size:17px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:0 28px 90px;}
+
+  /* ---------- COVER ---------- */
+  .cover{
+    background:
+      radial-gradient(120% 90% at 80% 0%, rgba(180,80,42,.22), transparent 55%),
+      linear-gradient(160deg, var(--evergreen) 0%, var(--evergreen-soft) 70%, #244238 100%);
+    color:var(--sand);
+    padding:74px 28px 60px;
+    position:relative;
+    overflow:hidden;
+  }
+  .cover::after{
+    content:"";position:absolute;inset:0;
+    background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.025) 0 1px,transparent 1px 38px);
+    pointer-events:none;
+  }
+  .cover-inner{max-width:920px;margin:0 auto;position:relative;z-index:2;}
+  .kicker{
+    font-family:'IBM Plex Mono',monospace;
+    letter-spacing:.34em;text-transform:uppercase;
+    font-size:11px;color:var(--rust-soft);margin-bottom:26px;
+  }
+  .cover h1{
+    font-family:'Fraunces',serif;
+    font-weight:900;font-size:clamp(40px,7vw,76px);
+    line-height:.98;letter-spacing:-.01em;color:var(--sand);
+  }
+  .cover h1 em{font-style:italic;font-weight:400;color:var(--rust-soft);}
+  .cover .sub{
+    font-size:19px;color:#dfe6dd;margin-top:24px;max-width:620px;font-weight:300;
+  }
+  .cover-meta{
+    display:flex;flex-wrap:wrap;gap:30px;margin-top:38px;
+    padding-top:26px;border-top:1px solid rgba(255,255,255,.18);
+  }
+  .cover-meta div span{
+    display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;
+    letter-spacing:.2em;text-transform:uppercase;color:var(--moss);margin-bottom:5px;
+  }
+  .cover-meta div strong{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--sand);}
+
+  /* ---------- SHARED ---------- */
+  h2.section{
+    font-family:'Fraunces',serif;font-weight:900;
+    font-size:clamp(26px,4vw,38px);color:var(--evergreen);
+    margin:64px 0 6px;line-height:1.05;letter-spacing:-.01em;
+  }
+  .section-rule{height:3px;width:62px;background:var(--rust);margin-bottom:26px;border-radius:2px;}
+  .lead{font-size:18px;color:var(--slate);margin-bottom:22px;font-weight:300;}
+
+  /* ---------- ESSENTIALS GRID ---------- */
+  .essentials{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:2px;background:var(--sand-deep);border:2px solid var(--evergreen);
+    margin-top:34px;border-radius:10px;overflow:hidden;
+  }
+  .essentials .cell{background:var(--paper);padding:20px 22px;}
+  .essentials .cell span{
+    font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--fog);display:block;margin-bottom:7px;
+  }
+  .essentials .cell strong{font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--evergreen);display:block;line-height:1.25;}
+  .essentials .cell small{font-size:13px;color:var(--slate);}
+
+  /* ---------- CALLOUT ---------- */
+  .callout{
+    background:linear-gradient(135deg,#fcefe6,#f8e3d4);
+    border:2px solid var(--rust);border-left-width:8px;
+    border-radius:10px;padding:26px 28px;margin:34px 0;
+  }
+  .callout h3{
+    font-family:'Fraunces',serif;font-weight:900;font-size:21px;color:var(--rust);
+    margin-bottom:10px;display:flex;align-items:center;gap:10px;
+  }
+  .callout p{color:#5e3a28;margin-bottom:10px;}
+  .callout p:last-child{margin-bottom:0;}
+  .callout ul{margin:8px 0 0 20px;color:#5e3a28;}
+  .callout li{margin-bottom:6px;}
+
+  .note-soft{
+    background:var(--paper);border:1px solid var(--sand-deep);border-left:5px solid var(--moss);
+    border-radius:8px;padding:18px 22px;margin:24px 0;color:var(--slate);font-size:15.5px;
+  }
+  .note-soft strong{color:var(--evergreen);}
+
+  /* ---------- LEG BANNER ---------- */
+  .leg{
+    margin-top:72px;background:var(--evergreen);color:var(--sand);
+    border-radius:12px 12px 0 0;padding:30px 30px 26px;position:relative;overflow:hidden;
+  }
+  .leg::before{
+    content:attr(data-num);position:absolute;right:18px;top:-22px;
+    font-family:'Fraunces',serif;font-weight:900;font-size:130px;color:rgba(255,255,255,.06);line-height:1;
+  }
+  .leg .leg-k{font-family:'IBM Plex Mono',monospace;letter-spacing:.28em;text-transform:uppercase;font-size:11px;color:var(--rust-soft);margin-bottom:12px;}
+  .leg h2{font-family:'Fraunces',serif;font-weight:900;font-size:34px;line-height:1;color:var(--sand);position:relative;z-index:2;}
+  .leg .leg-meta{margin-top:14px;font-size:15px;color:#cfdacb;position:relative;z-index:2;}
+  .leg-body{background:var(--paper);border:2px solid var(--evergreen);border-top:none;border-radius:0 0 12px 12px;padding:8px 0 4px;}
+
+  /* ---------- DAY ---------- */
+  .day{padding:26px 30px;border-bottom:1px solid var(--sand-deep);}
+  .day:last-child{border-bottom:none;}
+  .day-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:14px;}
+  .day-date{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;letter-spacing:.05em;
+    background:var(--evergreen);color:var(--sand);padding:5px 11px;border-radius:5px;white-space:nowrap;
+  }
+  .day-title{font-family:'Fraunces',serif;font-weight:600;font-size:22px;color:var(--evergreen);line-height:1.1;}
+  .day-tag{
+    font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--rust);border:1px solid var(--rust-soft);padding:3px 8px;border-radius:20px;
+  }
+  .block{margin:14px 0 4px;}
+  .block .bt{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--moss);font-weight:500;margin-bottom:5px;
+  }
+  .block p{margin-bottom:8px;}
+  .spot{font-family:'Fraunces',serif;font-weight:600;color:var(--rust);font-style:italic;}
+  .ef{
+    display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.06em;
+    background:#e7f0e3;color:#3c6b48;border:1px solid #b9d4ba;padding:1px 6px;border-radius:4px;
+    vertical-align:middle;margin-left:3px;text-transform:uppercase;font-weight:500;
+  }
+
+  ul.tight{margin:6px 0 8px 20px;}
+  ul.tight li{margin-bottom:7px;}
+
+  /* ---------- DINING TABLE ---------- */
+  .dine-city{margin-top:30px;}
+  .dine-city h3{
+    font-family:'Fraunces',serif;font-weight:900;font-size:23px;color:var(--evergreen);
+    border-bottom:3px solid var(--rust);display:inline-block;padding-bottom:4px;margin-bottom:14px;
+  }
+  table{width:100%;border-collapse:collapse;font-size:15px;}
+  table td{padding:11px 12px;border-bottom:1px solid var(--sand-deep);vertical-align:top;}
+  table tr td:first-child{font-family:'Fraunces',serif;font-weight:600;color:var(--rust);width:32%;}
+  table .ef{margin-left:4px;}
+
+  .legend{display:flex;gap:24px;flex-wrap:wrap;margin:18px 0 4px;font-size:14px;color:var(--slate);}
+  .legend .ef{margin-left:0;margin-right:6px;}
+
+  /* ---------- CHECKLIST ---------- */
+  .check{background:var(--paper);border:2px solid var(--evergreen);border-radius:10px;padding:8px 26px;margin-top:20px;}
+  .check li{list-style:none;padding:12px 0 12px 34px;position:relative;border-bottom:1px solid var(--sand-deep);}
+  .check li:last-child{border-bottom:none;}
+  .check li::before{content:"☐";position:absolute;left:4px;top:10px;font-size:20px;color:var(--rust);}
+  .check li strong{color:var(--evergreen);font-family:'Fraunces',serif;}
+
+  footer{margin-top:70px;padding-top:28px;border-top:2px solid var(--evergreen);color:var(--fog);font-size:13px;text-align:center;font-family:'IBM Plex Mono',monospace;letter-spacing:.05em;}
+
+  a{color:var(--rust);text-decoration:none;border-bottom:1px dotted var(--rust-soft);}
+
+  @media print{
+    body{background:#fff;font-size:12px;}
+    .cover{padding:40px 28px;}
+    .leg{break-inside:avoid;}
+    .day{break-inside:avoid;}
+    .callout,.note-soft{break-inside:avoid;}
+  }
+  @media(max-width:560px){
+    .cover h1{font-size:42px;}
+    .leg h2{font-size:26px;}
+    table tr td:first-child{width:42%;}
+  }
+</style>
+<style>
+  #gate{
+    position:fixed;inset:0;z-index:9999;
+    background:var(--evergreen);
+    display:flex;align-items:center;justify-content:center;
+    flex-direction:column;gap:20px;
+  }
+  #gate h2{
+    font-family:'Fraunces',serif;font-weight:900;font-size:36px;
+    color:var(--sand);letter-spacing:-.01em;
+  }
+  #gate p{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--rust-soft);}
+  #gate-form{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
+  #gate-pw{
+    font-family:'IBM Plex Mono',monospace;font-size:15px;
+    background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.25);
+    color:var(--sand);padding:12px 18px;border-radius:7px;outline:none;width:240px;
+  }
+  #gate-pw::placeholder{color:rgba(255,255,255,.35);}
+  #gate-pw:focus{border-color:var(--rust-soft);}
+  #gate-btn{
+    font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.1em;text-transform:uppercase;
+    background:var(--rust);color:var(--sand);border:none;padding:12px 22px;border-radius:7px;cursor:pointer;
+  }
+  #gate-btn:hover{background:var(--rust-soft);}
+  #gate-err{font-family:'IBM Plex Mono',monospace;font-size:12px;color:#f08080;letter-spacing:.1em;min-height:18px;}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <p>Private</p>
+  <h2>Fog, Forest &amp; Firelight</h2>
+  <div id="gate-form">
+    <input id="gate-pw" type="password" placeholder="password" autocomplete="off">
+    <button id="gate-btn" onclick="checkPassword()">Enter</button>
+  </div>
+  <div id="gate-err"></div>
+</div>
+
+<script>
+(function(){
+  const HASH = "efa71650c48e689557daa6a425a079a69737204d007baee895c71f341a807e7b";
+  const KEY  = "trip_auth";
+
+  async function sha256(str){
+    const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
+    return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,"0")).join("");
+  }
+
+  window.checkPassword = async function(){
+    const val = document.getElementById("gate-pw").value;
+    const hash = await sha256(val);
+    if(hash === HASH){
+      localStorage.setItem(KEY,"1");
+      document.getElementById("gate").style.display="none";
+    } else {
+      document.getElementById("gate-err").textContent="incorrect password";
+      document.getElementById("gate-pw").value="";
+      document.getElementById("gate-pw").focus();
+    }
+  };
+
+  document.getElementById("gate-pw").addEventListener("keydown", e=>{
+    if(e.key==="Enter") window.checkPassword();
+    document.getElementById("gate-err").textContent="";
+  });
+
+  if(localStorage.getItem(KEY)==="1"){
+    document.getElementById("gate").style.display="none";
+  }
+})();
+</script>
+
+<!-- ============ COVER ============ -->
+<div class="cover">
+  <div class="cover-inner">
+    <div class="kicker">A Pacific Coast Family Journey · Summer 2026</div>
+    <h1>Fog, Forest<br>&amp; <em>Firelight</em></h1>
+    <p class="sub">Twenty-three days down the West Coast — the Emerald City, the City of Roses, and the City by the Bay — built for three travelers, one car, a love of food, and an easy, unhurried pace.</p>
+    <div class="cover-meta">
+      <div><span>Dates</span><strong>Jun 11 – Jul 3, 2026</strong></div>
+      <div><span>Travelers</span><strong>Mom, Sister &amp; You</strong></div>
+      <div><span>Route</span><strong>SEA → PDX → SFO → PDX</strong></div>
+      <div><span>Pace</span><strong>Balanced · Gentle</strong></div>
+      <div><span>Table</span><strong>Vegetarian throughout</strong></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- ============ ESSENTIALS ============ -->
+  <h2 class="section">The Trip at a Glance</h2>
+  <div class="section-rule"></div>
+  <p class="lead">Four legs, woven around your Portland home base. You'll do the long anchor trips first, then settle into a slower rhythm of day trips, with San Francisco as the mid-trip getaway.</p>
+
+  <div class="essentials">
+    <div class="cell"><span>Leg 1 — Seattle</span><strong>Jun 11 – 13</strong><small>2 nights · hotel + parking</small></div>
+    <div class="cell"><span>Leg 2 — Portland Base</span><strong>Jun 13 – 24</strong><small>Home · day trips by car</small></div>
+    <div class="cell"><span>Leg 3 — San Francisco</span><strong>Jun 24 – 27</strong><small>3 nights · fly + transit</small></div>
+    <div class="cell"><span>Leg 4 — Portland Wrap</span><strong>Jun 27 – Jul 3</strong><small>Home · flex &amp; favorites</small></div>
+    <div class="cell"><span>Daily Budget</span><strong>$75–150 pp</strong><small>food, entries, local transit</small></div>
+    <div class="cell"><span>Getting Around</span><strong>Car + Transit</strong><small>car in OR · transit/Uber in SF</small></div>
+  </div>
+
+  <!-- ============ WORLD CUP CALLOUT ============ -->
+  <div class="callout">
+    <h3>⚽ Read this first: the 2026 World Cup overlaps your entire trip</h3>
+    <p>The FIFA World Cup runs across North America this summer, and <strong>both Seattle and the San Francisco Bay Area are host cities</strong> — squarely inside your travel window. This won't ruin anything (it can even be a fun bonus), but it will affect hotel prices, crowds, and traffic, so plan around it:</p>
+    <ul>
+      <li><strong>Seattle (Jun 11–13):</strong> You arrive <em>before</em> Seattle's matches begin (the city's first match is June 15 at Lumen Field). Good timing — but the city is already buzzing, so book your hotel now.</li>
+      <li><strong>San Francisco (Jun 24–27):</strong> There's a Bay Area match the evening of <strong>Thursday June 25</strong> at Levi's Stadium (Santa Clara, ~40 mi south). Expect region-wide hotel demand, fan zones downtown, and surge pricing on Ubers. <strong>Book your SF hotel immediately</strong> — this is the single most time-sensitive thing on the list.</li>
+      <li><strong>Silver lining:</strong> Free fan festivals and big-screen watch parties pop up in both cities — a lively, low-cost evening if you want a taste of the atmosphere.</li>
+    </ul>
+  </div>
+
+  <!-- ============ DIETARY KEY ============ -->
+  <h2 class="section">Your Dietary Key</h2>
+  <div class="section-rule"></div>
+  <p class="lead">Every food pick below is vegetarian. The one nuance I've planned around: <strong>Mom &amp; Sister avoid eggs in savory food</strong> (desserts with egg are fine), while you eat eggs freely.</p>
+  <div class="note-soft">
+    Spots marked <span class="ef">egg-free easy</span> have plenty of fully egg-free savory mains — think South Indian, Sri Lankan, Ethiopian, Thai, Chinese, and Gujarati kitchens, where egg-free is the default rather than a special request. At any other listed spot, egg-free mains exist but are worth a quick confirm with the server. I've leaned the dinner picks toward the easy ones so nobody's ever stuck reading fine print.
+  </div>
+
+  <!-- ============ LEG 1: SEATTLE ============ -->
+  <div class="leg" data-num="01">
+    <div class="leg-k">Leg One · The Emerald City</div>
+    <h2>Seattle</h2>
+    <div class="leg-meta">Thu Jun 11 – Sat Jun 13 · 2 nights · You drive up from Portland to collect Mom &amp; Sister, then explore before heading south.</div>
+  </div>
+  <div class="leg-body">
+
+    <div class="day">
+      <div class="day-head">
+        <span class="day-date">THU · JUN 11</span>
+        <span class="day-title">Arrivals &amp; an Easy First Evening</span>
+        <span class="day-tag">Light</span>
+      </div>
+      <div class="block">
+        <div class="bt">Morning</div>
+        <p>Leave Portland early — it's about a <strong>3-hour drive up I-5</strong> to Sea-Tac. Aim to arrive with a little buffer before Mom &amp; Sister land.</p>
+      </div>
+      <div class="block">
+        <div class="bt">Afternoon</div>
+        <p>Pick up at the airport, then check into your hotel and let everyone shake off the travel. After a long flight, today is intentionally gentle — no agenda beyond a gorgeous, gentle reintroduction to the Northwest.</p>
+      </div>
+      <div class="block">
+        <div class="bt">Evening</div>
+        <p>A short stroll around <span class="spot">Pike Place Market</span> as it winds down, then an easy dinner nearby — <span class="spot">Plum Bistro</span> <span class="ef">egg-free easy</span> in Capitol Hill is a beloved all-vegan kitchen, so there's zero menu-decoding on night one.</p>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-head">
+        <span class="day-date">FRI · JUN 12</span>
+        <span class="day-title">Markets, Glass &amp; Skyline Views</span>
+        <span class="day-tag">Full Day</span>
+      </div>
+      <div class="block">
+        <div class="bt">Morning</div>
+        <p>Back to <span class="spot">Pike Place Market</span> early, when it's liveliest and least crowded — the flying fish, the original Starbucks, and the flower stalls. Grab pastries at the <span class="spot">Piroshky Piroshky</span> window (the apple-cinnamon rolls and veggie hand-pies are the move).</p>
+      </div>
+      <div class="block">
+        <div class="bt">Midday — Seattle Center</div>
+        <p>Walk or hop the monorail to <span class="spot">Chihuly Garden and Glass</span> — luminous blown-glass art indoors and in the garden, and a clear favorite for an art-loving group. Pair it with the <span class="spot">Space Needle</span> observation deck, or skip the ticket and just enjoy the grounds. Art-and-music fans can add <span class="spot">MoPOP (Museum of Pop Culture)</span> next door.</p>
+      </div>
+      <div class="block">
+        <div class="bt">Late Afternoon</div>
+        <p>Taxi up to <span class="spot">Kerry Park</span> for the postcard skyline-and-Mt.-Rainier view, then over to the <span class="spot">Fremont Troll</span> (the giant under-the-bridge sculpture) and a wander through quirky Fremont.</p>
+      </div>
+      <div class="block">
+        <div class="bt">Evening</div>
+        <p>Dinner at <span class="spot">Café Flora</span> <span class="ef">egg-free easy</span> — a 30-year Seattle institution in a light-filled garden room, vegetarian with abundant egg-free and vegan mains. (Save room; their weekend cinnamon rolls are legendary if you return for brunch.)</p>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-head">
+        <span class="day-date">SAT · JUN 13</span>
+        <span class="day-title">Waterfront, History &amp; the Drive South</span>
+        <span class="day-tag">Half Day + Drive</span>
+      </div>
+      <div class="block">
+        <div class="bt">Morning</div>
+        <p>A relaxed final loop: the <span class="spot">Olympic Sculpture Park</span> (free, open-air, easy flat paths along the water) and a stroll through historic <span class="spot">Pioneer Square</span> for the red-brick architecture. Coffee and a bite before you roll out.</p>
+      </div>
+      <div class="block">
+        <div class="bt">Afternoon</div>
+        <p>Point the car south for the <strong>~3-hour drive to Portland</strong>. Leaving today gets you out ahead of Seattle's first World Cup match (June 15) and onto home turf. Settle in, order in, rest up.</p>
+      </div>
+      <div class="note-soft"><strong>Seattle parking tip:</strong> Most downtown/Belltown hotels charge $45–65/night for valet or garage parking. Factor that in, and consider a hotel that bundles parking. See <em>Where to Stay</em> below for picks.</div>
+    </div>
+
+  </div>
+
+  <!-- ============ LEG 2: PORTLAND BASE ============ -->
+  <div class="leg" data-num="02">
+    <div class="leg-k">Leg Two · The City of Roses &amp; Its Wild Backyard</div>
+    <h2>Portland Base</h2>
+    <div class="leg-meta">Sat Jun 13 – Wed Jun 24 · Home base · A mix of city days, gentle day trips by car, and built-in rest. June is peak rose season and prime waterfall flow.</div>
+  </div>
+  <div class="leg-body">
+
+    <div class="day">
+      <div class="day-head">
+        <span class="day-date">SUN · JUN 14</span>
+        <span class="day-title">Roses, Gardens &amp; the World's Best Bookstore</span>
+        <span class="day-tag">City · Gentle</span>
+      </div>
+      <div class="block">
+        <div class="bt">Morning — Washington Park</div>
+        <p>You've timed this perfectly: mid-June is peak bloom at the <span class="spot">International Rose Test Garden</span> (free, gentle terraced paths, sweeping city views). Right above it, the <span class="spot">Portland Japanese Garden</span> is one of the finest outside Japan — serene, beautifully maintained, and an art-and-nature highlight.</p>
+      </div>
+      <div class="block">
+        <div class="bt">Afternoon</div>
+        <p>Drive up to <span class="spot">Pittock Mansion</span> for the panoramic view over the city to Mt. Hood, then downtown to <span class="spot">Powell's City of Books</span> — a full city block of books, color-coded by room. Easy to lose a happy hour here.</p>
+      </div>
+      <div class="block">
+        <div class="bt">Evening</div>
+        <p>Dinner at <span class="spot">Mirisata</span> <span class="ef">egg-free easy</span>, a worker-owned Sri Lankan curry house (rice &amp; curry plates, jackfruit, naturally egg-free), or <span class="spot">Lalibela</span> <span class="ef">egg-free easy</span> for communal Ethiopian platters scooped with injera.</p>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-head">
+        <span class="day-date">MON · JUN 15</span>
+        <span class="day-title">Columbia River Gorge — Waterfall Alley</span>
+        <span class="day-tag">Day Trip · Easy Walks</span>
+      </div>
+      <div class="block">
+        <div class="bt">The Plan</div>
+        <p>Thirty minutes east and you're in one of America's great waterfall corridors. Drive the <span class="spot">Historic Columbia River Highway</span>, stopping at <span class="spot">Vista House at Crown Point</span> (sweeping gorge view), then a string of falls with short, mostly flat paths: <span class="spot">Latourell Falls</span>, <span class="spot">Bridal Veil Falls</span> (easy quick walk), and the icon — <span class="spot">Multnomah Falls</span>, with the photogenic Benson Bridge a short stroll up. Add neighboring <span class="spot">Wahkeena Falls</span> if you have energy.</p>
+      </div>
+      <div class="block">
+        <div class="bt">Lunch</div>
+        <p>Continue to <span class="spot">Hood River</span> for lunch and a walk through the riverfront town, then loop home.</p>
+      </div>
+      <div class="callout" style="margin:16px 0 0;">
+        <h3 style="font-size:17px;">⚠️ 2026 Gorge logistics — don't skip</h3>
+        <ul style="margin-top:4px;">
+          <li><strong>Timed-entry permit</strong> (~$2) is required to drive the Waterfall Corridor late May–early Sept. Book online in advance — they sell out.</li>
+          <li>Go on a <strong>weekday</strong> and arrive before ~8:30 AM; Multnomah's lot fills fast.</li>
+          <li><strong>Closed in 2026:</strong> Eagle Creek Trail and Wahclella Falls remain closed from the Dec 2025 storms — skip those and check the Forest Service site before you go.</li>
+          <li>Some trailheads need a <strong>Northwest Forest Pass</strong> ($5/day).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-head">
+        <span class="day-date">TUE · JUN 16</span>
+        <span class="day-title">Slow Portland — Neighborhoods, Carts &amp; Coffee</span>
+        <span class="day-tag">Rest-ish · City</span>
+      </div>
+      <div class="block">
+        <div class="bt">The Idea</div>
+        <p>A deliberately unhurried day after the Gorge. Wander the <span class="spot">Alberta Arts District</span> and <span class="spot">Mississippi Avenue</span> — indie shops, murals, and Portland's famous <strong>food-cart pods</strong> (endless vegetarian options in one spot, so everyone picks their own).</p>
+      </div>
+      <div class="block">
+        <div class="bt">Coffee &amp; Quirk</div>
+        <p>Dip into Portland's coffee religion. For pure whimsy, the late-night <span class="spot">Rimsky-Korsakoffee House</span> — dessert and espresso in a creaky Victorian where the tables quietly move. Or visit the <span class="spot">McMenamins Kennedy School</span>, an old elementary school turned brewpub-hotel-cinema; you can walk the art-filled halls and grab a drink in the former detention room.</p>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-head">
+        <span class="day-date">WED · JUN 17</span>
+        <span class="day-title">Mount Hood &amp; Trillium Lake</span>
+        <span class="day-tag">Day Trip · Easy Loop</span>
+      </div>
+      <div class="block">
+        <div class="bt">The Plan</div>
+        <p>About 90 minutes southeast (fuel up in Sandy — last reliable gas). First stop, the flat, accessible <span class="spot">Trillium Lake Loop</span> (~2 mi, boardwalks, no climbs) for the classic mirror-image of Mt. Hood on the water — easy enough for everyone and pure postcard.</p>
+      </div>
+      <div class="block">
+        <div class="bt">Midday</div>
+        <p>Up to <span class="spot">Timberline Lodge</span> at 6,000 ft — a 1937 National Historic Landmark (and <em>The Shining</em>'s exterior). Free to walk in and explore the lobby and views; summer parking is free. Optional easy ride up the <span class="spot">Magic Mile chairlift</span> for alpine views without the hike.</p>
+      </div>
+      <div class="note-soft"><strong>Optional scenic return:</strong> loop back via Hood River and the Gorge if everyone's got the energy — otherwise the direct route home is shorter.</div>
+    </div>
+
+    <div class="day">
+      <div class="day-head">
+        <span class="day-date">THU · JUN 18</span>
+        <span class="day-title">The Oregon Coast — Cannon Beach &amp; Haystack Rock</span>
+        <span class="day-tag">Day Trip · Beach Walk</span>
+      </div>
+      <div class="block">
+        <div class="bt">The Plan</div>
+        <p>About 90 minutes west through forested Highway 26 to the coast. <span class="spot">Cannon Beach</span> is the star — the towering <span class="spot">Haystack Rock</span>, tide pools at low tide, and a flat, walkable beach. Browse the galleries and shops in town.</p>
+      </div>
+      <div class="block">
+        <div class="bt">Nearby — pick one or two</div>
+        <ul class="tight">
+          <li><span class="spot">Ecola State Park</span> — dramatic headland viewpoints; a short easy stroll gets you the big vista (the longer Clatsop Loop is optional).</li>
+          <li><span class="spot">Hug Point</span> — walk to a hidden waterfall and sea caves at low tide.</li>
+          <li><span class="spot">Astoria</span> (optional extension) — historic riverfront town with the <span class="spot">Astoria Column</span> view and sea lions on the docks.</li>
+        </ul>
+      </div>
+      <div class="block">
+        <div class="bt">Coffee</div>
+        <p>Coast pit-stops: <span class="spot">Sleepy Monk Coffee</span> in Cannon Beach or <span class="spot">Sea Level Bakery</span> on the way.</p>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-head">
+        <span class="day-date">FRI · JUN 19</span>
+        <span class="day-title">Museums, Curiosities &amp; Riverfront</span>
+        <span class="day-tag">Rest-ish · City</span>
+      </div>
+      <div class="block">
+        <div class="bt">Choose your speed</div>
+        <p>A flexible city day. For art &amp; history: the <span class="spot">Portland Art Museum</span> and the tranquil <span class="spot">Lan Su Chinese Garden</span> downtown. For hands-on fun: <span class="spot">OMSI</span> (science museum with a real submarine docked on the river). For the wonderfully weird: the <span class="spot">Freakybuttrue Peculiarium</span> (a tongue-in-cheek oddities museum) and <span class="spot">Movie Madness</span> (a video store with a Hollywood-prop museum inside).</p>
+      </div>
+      <div class="block">
+        <div class="bt">Evening</div>
+        <p>Dinner at <span class="spot">Kati Portland</span> <span class="ef">egg-free easy</span> (modern Thai, easy egg-free mains) or <span class="spot">Top Burmese</span> <span class="ef">egg-free easy</span>. Music fans: check listings at the historic <span class="spot">Crystal Ballroom</span> (famous bouncing floor) or <span class="spot">Revolution Hall</span>.</p>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-head">
+        <span class="day-date">SAT · JUN 20</span>
+        <span class="day-title">Saturday Market + Wine Country (Optional)</span>
+        <span class="day-tag">Flex · Gentle</span>
+      </div>
+      <div class="block">
+        <div class="bt">Morning</div>
+        <p>The <span class="spot">Portland Saturday Market</span> on the waterfront (and the year-round <span class="spot">PSU Farmers Market</span>) — crafts, local food, easy browsing.</p>
+      </div>
+      <div class="block">
+        <div class="bt">Afternoon — optional</div>
+        <p>A scenic, low-key swing through the <span class="spot">Willamette Valley / Dundee Hills</span> (~45 min): rolling vineyards, farm stands, and relaxed tasting rooms with valley views. Skip it freely if a slow day at home sounds better — that's the whole point of the flex day.</p>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-head">
+        <span class="day-date">SUN JUN 21 – TUE JUN 23</span>
+        <span class="day-title">Flex Days &amp; Favorites Before SF</span>
+        <span class="day-tag">Open · Your Call</span>
+      </div>
+      <div class="block">
+        <div class="bt">A menu, not a schedule</div>
+        <p>These days are intentionally open — repeat a favorite, rest, or pick from:</p>
+        <ul class="tight">
+          <li><span class="spot">Mt. Tabor Park</span> — wander an extinct volcano inside the city, with reservoirs and skyline views (gentle paths).</li>
+          <li><span class="spot">Hawthorne &amp; Division</span> — bookshops, vintage, and one of the city's densest stretches of good vegetarian eating.</li>
+          <li><span class="spot">Sellwood</span> antiques row, or a stroll along the <span class="spot">Eastbank Esplanade</span> river path.</li>
+          <li>A second Gorge or Coast outing if you loved the first.</li>
+          <li>The <span class="spot">Ole Bolle troll</span> at Nordic Northwest — one of artist Thomas Dambo's giant recycled-wood trolls, the only one in Oregon.</li>
+        </ul>
+      </div>
+      <div class="note-soft"><strong>Tue Jun 23:</strong> Keep it light — pack and prep for the early-ish flight to San Francisco.</div>
+    </div>
+
+  </div>
+
+  <!-- ============ LEG 3: SAN FRANCISCO ============ -->
+  <div class="leg" data-num="03">
+    <div class="leg-k">Leg Three · The City by the Bay</div>
+    <h2>San Francisco</h2>
+    <div class="leg-meta">Wed Jun 24 – Sat Jun 27 · 3 nights · Fly PDX→SFO · Public transit + Uber (no car needed). Book the hotel <strong>now</strong> — World Cup demand.</div>
+  </div>
+  <div class="leg-body">
+
+    <div class="day">
+      <div class="day-head">
+        <span class="day-date">WED · JUN 24</span>
+        <span class="day-title">Arrive · Ferry Building &amp; the Waterfront</span>
+        <span class="day-tag">Half Day</span>
+      </div>
+      <div class="block">
+        <div class="bt">Getting in</div>
+        <p>From SFO, <strong>BART</strong> runs straight downtown (~30 min, cheap) — easiest with luggage. Check into your Union Square / Nob Hill hotel (see <em>Where to Stay</em>).</p>
+      </div>
+      <div class="block">
+        <div class="bt">Afternoon</div>
+        <p>Ease in along the <span class="spot">Embarcadero</span> to the <span class="spot">Ferry Building Marketplace</span> — an artisan food hall that's a vegetarian playground (cheese, bread, produce, chocolate). Ride a <span class="spot">historic streetcar or cable car</span> for the classic SF moment.</p>
+      </div>
+      <div class="block">
+        <div class="bt">Evening</div>
+        <p>Dinner at <span class="spot">Udupi Palace</span> <span class="ef">egg-free easy</span> in the Mission — pure-vegetarian South Indian, with crispy dosas the size of a briefcase and a great thali. Naturally egg-free and a guaranteed crowd-pleaser for Mom &amp; Sister.</p>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-head">
+        <span class="day-date">THU · JUN 25</span>
+        <span class="day-title">Golden Gate Park, the Bridge &amp; Lands End</span>
+        <span class="day-tag">Full Day · Easy Walks</span>
+      </div>
+      <div class="block">
+        <div class="bt">Morning — Golden Gate Park</div>
+        <p>Spend it among the park's gems: the <span class="spot">de Young Museum</span> (art, plus a free observation tower), the serene <span class="spot">Japanese Tea Garden</span>, and — for a science-loving group — the <span class="spot">California Academy of Sciences</span> (rainforest dome, aquarium, living roof).</p>
+      </div>
+      <div class="block">
+        <div class="bt">Afternoon</div>
+        <p>Out to the coast: a <span class="spot">Golden Gate Bridge</span> viewpoint, then the <span class="spot">Lands End</span> trail (flat, scenic clifftop walk) down to the haunting <span class="spot">Sutro Baths</span> ruins — one of the city's best low-key, low-cost outings.</p>
+      </div>
+      <div class="block">
+        <div class="bt">Evening</div>
+        <p><strong>World Cup note:</strong> there's a Bay Area match tonight (~7 PM, Levi's Stadium in Santa Clara). Downtown will be lively and Ubers may surge — reserve dinner early. Try <span class="spot">Besharam</span> <span class="ef">egg-free easy</span>, an inventive vegetarian Gujarati spot in the Dogpatch, or <span class="spot">Greens</span> at Fort Mason — the landmark vegetarian restaurant with picture-window bay-and-bridge views (book ahead).</p>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-head">
+        <span class="day-date">FRI · JUN 26</span>
+        <span class="day-title">Murals, Mission Food &amp; the Classic Postcards</span>
+        <span class="day-tag">Full Day · City</span>
+      </div>
+      <div class="block">
+        <div class="bt">Morning — the Mission</div>
+        <p>The city's most colorful district: the murals of <span class="spot">Balmy Alley</span> and <span class="spot">Clarion Alley</span>, sunny <span class="spot">Dolores Park</span>, and a serious vegetarian food scene. Lunch at <span class="spot">Cha-Ya</span> <span class="ef">egg-free easy</span> (vegetarian Japanese — soba, udon, sushi) or grab pastries at <span class="spot">Tartine</span>.</p>
+      </div>
+      <div class="block">
+        <div class="bt">Afternoon</div>
+        <p>The classic sweep: <span class="spot">Painted Ladies</span> at Alamo Square, the crooked <span class="spot">Lombard Street</span>, and <span class="spot">Chinatown</span> / <span class="spot">North Beach</span> on foot. Optional <span class="spot">Coit Tower</span> for the view.</p>
+      </div>
+      <div class="note-soft"><strong>Want Alcatraz?</strong> It books out weeks ahead, especially in summer. If it appeals, reserve the moment your dates are firm — otherwise the itinerary stands beautifully without it.</div>
+    </div>
+
+    <div class="day">
+      <div class="day-head">
+        <span class="day-date">SAT · JUN 27</span>
+        <span class="day-title">A Last Look &amp; Fly Home</span>
+        <span class="day-tag">Half Day</span>
+      </div>
+      <div class="block">
+        <div class="bt">Morning</div>
+        <p>One easy final stop near your hotel — a cable-car ride you missed, or coffee and people-watching at the Ferry Building — then BART back to SFO for the flight to Portland.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============ LEG 4: PORTLAND WRAP ============ -->
+  <div class="leg" data-num="04">
+    <div class="leg-k">Leg Four · Home Stretch</div>
+    <h2>Portland, Unhurried</h2>
+    <div class="leg-meta">Sat Jun 27 – Fri Jul 3 · Home base · Slow days, favorites revisited, and the run-up to the July 4th weekend.</div>
+  </div>
+  <div class="leg-body">
+    <div class="day">
+      <div class="day-head">
+        <span class="day-date">JUN 27 – JUL 3</span>
+        <span class="day-title">Six Open Days — A Curated Menu</span>
+        <span class="day-tag">Flex · Gentle</span>
+      </div>
+      <div class="block">
+        <div class="bt">The philosophy</div>
+        <p>By now everyone knows the city, so this stretch stays loose on purpose. Mix rest days with a few of these:</p>
+        <ul class="tight">
+          <li><strong>Anything you loved, again</strong> — a return Gorge waterfall run, a second beach day at the coast, or a lazy afternoon at a food-cart pod.</li>
+          <li><strong>Gardens &amp; views</strong> — the parts of Washington Park or the Japanese Garden you didn't finish; sunset from Pittock Mansion or Mt. Tabor.</li>
+          <li><strong>Deeper coast</strong> — an overnight or long day to Manzanita or Oswald West State Park (Short Sand Beach), quieter than Cannon Beach.</li>
+          <li><strong>Wine &amp; farm country</strong> — a relaxed Willamette Valley afternoon if you skipped it earlier.</li>
+          <li><strong>July 4th lead-up</strong> — the city's energy builds toward the holiday; riverfront strolls and neighborhood celebrations are easy to dip into. (Main fireworks fall on the 4th, just after your window — so no need to plan around crowds.)</li>
+        </ul>
+      </div>
+      <div class="note-soft"><strong>Fri Jul 3:</strong> A gentle final day — a favorite breakfast, last coffee, a slow goodbye to the Northwest before Mom &amp; Sister head out.</div>
+    </div>
+  </div>
+
+  <!-- ============ WHERE TO STAY ============ -->
+  <h2 class="section">Where to Stay</h2>
+  <div class="section-rule"></div>
+
+  <div class="dine-city">
+    <h3>Seattle — 2 nights, parking required</h3>
+    <p class="lead" style="margin-bottom:14px;">Base yourself <strong>downtown / Belltown</strong> or near <strong>Seattle Center</strong> — walkable to Pike Place and the Space Needle, and central for the short visit. Prioritize a property with on-site or bundled parking, since street parking is scarce and garages run $45–65/night.</p>
+    <table>
+      <tr><td>Belltown / Downtown</td><td>Closest to Pike Place &amp; the waterfront; widest hotel choice. Confirm parking rate when booking — it's often separate.</td></tr>
+      <tr><td>Lower Queen Anne / Seattle Center</td><td>Steps from the Space Needle &amp; Chihuly; slightly calmer, often easier parking.</td></tr>
+      <tr><td>South Lake Union</td><td>Newer hotels, frequently with garages; a short ride to the core.</td></tr>
+    </table>
+  </div>
+
+  <div class="dine-city">
+    <h3>San Francisco — 3 nights, no car</h3>
+    <p class="lead" style="margin-bottom:14px;">Stay in <strong>Union Square or Lower Nob Hill</strong> — the most transit-connected part of the city (cable cars, Muni, and BART all at hand), walkable and well-suited to first-timers. You won't need or want a car here.</p>
+    <table>
+      <tr><td>Union Square</td><td>Central hub, every transit line, biggest hotel selection across price points. Weekday rates sometimes dip — but book early given World Cup demand.</td></tr>
+      <tr><td>Lower Nob Hill</td><td>Top transit score in the city, a notch quieter, cable cars at the door.</td></tr>
+      <tr><td>Embarcadero / Financial District</td><td>Near the Ferry Building &amp; BART; business-district hotels can drop prices on weekends.</td></tr>
+    </table>
+    <div class="note-soft"><strong>Why book SF first:</strong> the June 25 Bay Area match plus general tournament tourism will tighten availability and lift prices region-wide. Locking the hotel is the most urgent task on your list.</div>
+  </div>
+
+  <!-- ============ DINING ============ -->
+  <h2 class="section">Vegetarian Dining Cheat-Sheet</h2>
+  <div class="section-rule"></div>
+  <div class="legend">
+    <span><span class="ef">egg-free easy</span> abundant egg-free savory mains — safest for Mom &amp; Sister</span>
+  </div>
+
+  <div class="dine-city">
+    <h3>Seattle</h3>
+    <table>
+      <tr><td>Café Flora <span class="ef">egg-free easy</span></td><td>Garden-room vegetarian institution; egg-free &amp; vegan mains, famous cinnamon rolls.</td></tr>
+      <tr><td>Plum Bistro <span class="ef">egg-free easy</span></td><td>Beloved all-vegan kitchen in Capitol Hill — no menu-decoding needed.</td></tr>
+      <tr><td>Ba Bar Green <span class="ef">egg-free easy</span></td><td>All-plant-based Vietnamese; fresh rolls, fried rice, daily pastries.</td></tr>
+      <tr><td>Harvest Beat</td><td>Intimate five-course vegetarian tasting menu, farm-sourced — a special-occasion dinner.</td></tr>
+      <tr><td>Piroshky Piroshky</td><td>Pike Place window for veg hand-pies &amp; apple-cinnamon rolls (quick bite).</td></tr>
+    </table>
+  </div>
+
+  <div class="dine-city">
+    <h3>Portland</h3>
+    <table>
+      <tr><td>Mirisata <span class="ef">egg-free easy</span></td><td>Worker-owned Sri Lankan rice &amp; curry; naturally egg-free, deeply flavorful.</td></tr>
+      <tr><td>Lalibela <span class="ef">egg-free easy</span></td><td>Communal Ethiopian veg platters on injera — great for sharing.</td></tr>
+      <tr><td>Kati Portland <span class="ef">egg-free easy</span></td><td>Modern Thai with easy egg-free mains.</td></tr>
+      <tr><td>Top Burmese <span class="ef">egg-free easy</span></td><td>Oregon's first Burmese restaurant; warm room, big veg selection.</td></tr>
+      <tr><td>Blossoming Lotus</td><td>Polished plant-based bowls &amp; comfort food in a calm space.</td></tr>
+      <tr><td>Food-cart pods</td><td>Alberta / Mississippi / downtown — everyone orders their own; endless veg.</td></tr>
+      <tr><td>Rimsky-Korsakoffee House</td><td>Whimsical late-night dessert &amp; espresso in a Victorian (egg in some desserts — fine per your note).</td></tr>
+    </table>
+  </div>
+
+  <div class="dine-city">
+    <h3>San Francisco</h3>
+    <table>
+      <tr><td>Udupi Palace <span class="ef">egg-free easy</span></td><td>Pure-veg South Indian in the Mission; legendary dosas &amp; thali, naturally egg-free.</td></tr>
+      <tr><td>Besharam <span class="ef">egg-free easy</span></td><td>Inventive vegetarian Gujarati in the Dogpatch — playful, original plates.</td></tr>
+      <tr><td>Cha-Ya <span class="ef">egg-free easy</span></td><td>Serene vegetarian Japanese (soba, udon, sushi) near Dolores Park.</td></tr>
+      <tr><td>Greens</td><td>Landmark vegetarian dining at Fort Mason with bay-and-bridge views — book ahead.</td></tr>
+      <tr><td>Ferry Building Marketplace</td><td>Artisan food hall; graze cheese, bread, produce, chocolate (great for a build-your-own lunch).</td></tr>
+      <tr><td>Jalebi Street</td><td>Walk-in vegetarian Indian chaat &amp; curries — reliable, fun spread.</td></tr>
+    </table>
+  </div>
+
+  <!-- ============ PRACTICAL ============ -->
+  <h2 class="section">Practical Notes &amp; Money</h2>
+  <div class="section-rule"></div>
+
+  <div class="dine-city">
+    <h3>Rough daily budget (mid · per person)</h3>
+    <table>
+      <tr><td>Food &amp; coffee</td><td>~$45–75/day — food carts &amp; South Indian lunches keep it low; a tasting-menu night (e.g., Harvest Beat) sits at the top end.</td></tr>
+      <tr><td>Attractions &amp; entries</td><td>~$15–35/day — many highlights (rose garden, Lands End, Sutro Baths, sculpture parks, Timberline lobby, waterfalls) are free or near-free.</td></tr>
+      <tr><td>Local transit / Uber (SF)</td><td>~$15–30/day — BART from SFO is cheap; budget extra for surge around the Jun 25 match.</td></tr>
+      <tr><td>Gas &amp; parking (OR day trips)</td><td>Shared across the group; Gorge permit ~$2, NW Forest Pass $5/day where needed.</td></tr>
+    </table>
+  </div>
+
+  <div class="dine-city">
+    <h3>Getting around</h3>
+    <table>
+      <tr><td>Seattle &amp; Portland</td><td>Your car covers everything. In central Seattle, lean on the hotel garage and short rides rather than re-parking.</td></tr>
+      <tr><td>Portland → SF</td><td>Fly PDX→SFO (Jun 24) and SFO→PDX (Jun 27). BART links SFO to downtown.</td></tr>
+      <tr><td>Within SF</td><td>Cable cars, Muni, BART, and Uber — no rental car. Tired feet? Uber is your built-in fallback, exactly as planned.</td></tr>
+    </table>
+  </div>
+
+  <div class="dine-city">
+    <h3>Packing for a PNW summer</h3>
+    <p>Layers. June mornings can be cool and gray, afternoons warm; the coast and Mt. Hood run colder and breezier than the city. Pack a light rain shell, comfortable walking shoes, and sunglasses. Multnomah Falls will mist you — a thin waterproof layer helps.</p>
+  </div>
+
+  <div class="dine-city">
+    <h3>Booking checklist — in priority order</h3>
+    <ul class="check">
+      <li><strong>San Francisco hotel</strong> (Jun 24–27) — most urgent; World Cup demand. Union Square / Lower Nob Hill.</li>
+      <li><strong>Seattle hotel with parking</strong> (Jun 11–13) — Belltown / Seattle Center.</li>
+      <li><strong>PDX⇄SFO flights</strong> — Jun 24 out, Jun 27 back.</li>
+      <li><strong>Columbia River Gorge timed-entry permit</strong> (~$2) for your chosen Gorge day.</li>
+      <li><strong>Dinner reservations</strong> — Greens (SF), Harvest Beat (Seattle) and any World Cup-night dining.</li>
+      <li><strong>Alcatraz</strong> — only if you want it; books out weeks ahead.</li>
+      <li><strong>Check trail status</strong> — Forest Service site for Gorge closures (Eagle Creek / Wahclella still closed in 2026).</li>
+    </ul>
+  </div>
+
+  <footer>
+    Pacific Coast Family Itinerary · Jun 11 – Jul 3, 2026 · Seattle → Portland → San Francisco → Portland<br>
+    Built around a balanced pace, gentle walks, and a vegetarian table. Details (hours, permits, prices) shift — confirm close to travel.
+  </footer>
+
+</div>
+</body>
+</html>
