@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mtanneer.github.io/sitemap-index.xml
