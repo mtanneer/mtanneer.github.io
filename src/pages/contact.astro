@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { SITE } from '../lib/site';
 ---
 
 <Layout title="Contact">
@@ -8,6 +9,11 @@ import Layout from '../layouts/Layout.astro';
     Contact
   </h1>
   <p class="text-[16px] leading-[1.88] text-[var(--text-muted)] font-light">
-    Coming in Phase 4.
+    If you have questions or are curious about my work, feel free to reach out.
   </p>
+  <div class="flex flex-wrap gap-3 mt-6">
+    <a href={`mailto:${SITE.email}`} class="font-mono text-[11px] tracking-wide flex items-center gap-1.5 rounded-md border border-[var(--border)] bg-[var(--bg-card)] px-4.5 py-2.5 text-[var(--text-muted)] hover:border-[var(--accent)] hover:text-[var(--accent)] hover:bg-[var(--accent-dim)] transition-colors">✉ Email</a>
+    <a href={SITE.linkedin} target="_blank" rel="noreferrer" class="font-mono text-[11px] tracking-wide flex items-center gap-1.5 rounded-md border border-[var(--border)] bg-[var(--bg-card)] px-4.5 py-2.5 text-[var(--text-muted)] hover:border-[var(--accent)] hover:text-[var(--accent)] hover:bg-[var(--accent-dim)] transition-colors">LinkedIn ↗</a>
+    <a href={SITE.github} target="_blank" rel="noreferrer" class="font-mono text-[11px] tracking-wide flex items-center gap-1.5 rounded-md border border-[var(--border)] bg-[var(--bg-card)] px-4.5 py-2.5 text-[var(--text-muted)] hover:border-[var(--accent)] hover:text-[var(--accent)] hover:bg-[var(--accent-dim)] transition-colors">GitHub ↗</a>
+  </div>
 </Layout>
