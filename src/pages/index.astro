@@ -1,9 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { SITE } from '../lib/site';
-import { fetchGithubStats } from '../lib/github';
+import { fetchGithubStats, fetchContributionCalendar, fetchPinnedRepos } from '../lib/github';
 
 const stats = await fetchGithubStats();
+const calendar = await fetchContributionCalendar();
+const pinnedRepos = await fetchPinnedRepos();
+const levelColor = {
+  0: 'var(--bg-card)',
+  1: 'color-mix(in srgb, var(--accent) 25%, var(--bg-card))',
+  2: 'color-mix(in srgb, var(--accent) 50%, var(--bg-card))',
+  3: 'color-mix(in srgb, var(--accent) 75%, var(--bg-card))',
+  4: 'var(--accent)',
+} as const;
 const relativeTime = (iso: string) => {
   const days = Math.floor((Date.now() - new Date(iso).valueOf()) / 86_400_000);
   if (days === 0) return "today";
@@ -36,8 +45,30 @@ const relativeTime = (iso: string) => {
   <p class="font-mono text-[10px] uppercase tracking-widest text-[var(--text-dim)] mb-5">
     {stats.publicRepos} public repos · {stats.followers} followers
   </p>
+
+  {calendar && (
+    <div class="mb-8 overflow-x-auto">
+      <p class="font-mono text-[10px] uppercase tracking-widest text-[var(--text-dim)] mb-2">
+        {calendar.totalContributions} contributions in the last year
+      </p>
+      <div class="flex gap-[3px]">
+        {calendar.weeks.map((week) => (
+          <div class="flex flex-col gap-[3px]">
+            {week.map((day) => (
+              <span
+                title={`${day.count} contributions on ${day.date}`}
+                class="block h-[10px] w-[10px] rounded-[2px]"
+                style={`background-color: ${levelColor[day.level]}`}
+              />
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  )}
+
   <div class="flex flex-col">
-    {stats.recentRepos.map((repo) => (
+    {pinnedRepos.map((repo) => (
       <a
         href={repo.url}
         target="_blank"

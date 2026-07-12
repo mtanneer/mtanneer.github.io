@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { SITE, NAV } from '../lib/site';
+import { fetchDocsRepos } from '../lib/github';
 
 interface Props {
   title?: string;
@@ -11,6 +12,7 @@ const { title, description = "Hardware engineer building at the intersection of 
 const pageTitle = title ? `${title} — ${SITE.name}` : `${SITE.name} — ${SITE.role}`;
 const currentPath = Astro.url.pathname;
 const canonicalURL = new URL(currentPath, Astro.site);
+const docsRepos = await fetchDocsRepos();
 ---
 
 <!doctype html>
@@ -69,6 +71,23 @@ const canonicalURL = new URL(currentPath, Astro.site);
             );
           })}
         </nav>
+        {docsRepos.length > 0 && (
+          <div class="border-t border-[var(--border)] p-2">
+            <p class="px-3 pb-1 pt-2 font-mono text-[10px] uppercase tracking-wide text-[var(--text-dim)]">
+              Documentation
+            </p>
+            {docsRepos.map((repo) => (
+              <a
+                href={repo.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-mono block rounded-md px-3 py-1.5 text-[11.5px] text-[var(--text-muted)] transition-colors hover:bg-[var(--bg-hover)] hover:text-[var(--text)]"
+              >
+                {repo.name}
+              </a>
+            ))}
+          </div>
+        )}
         <div class="mt-auto flex flex-wrap gap-3 border-t border-[var(--border)] px-4 py-3">
           <span class="font-mono text-[10px] text-[var(--text-dim)]">{SITE.location}</span>
         </div>

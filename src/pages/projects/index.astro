@@ -1,10 +1,12 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import { fetchPinnedRepos } from '../../lib/github';
 
 const projects = (await getCollection('projects')).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
+const pinnedRepos = await fetchPinnedRepos();
 ---
 
 <Layout title="Projects">
@@ -12,6 +14,29 @@ const projects = (await getCollection('projects')).sort(
   <h1 class="font-display text-[clamp(30px,5vw,52px)] font-medium leading-tight tracking-tight text-[var(--white)] mb-8">
     Projects
   </h1>
+
+  {pinnedRepos.length > 0 && (
+    <div class="mb-10">
+      <p class="font-mono text-[10px] uppercase tracking-widest text-[var(--text-dim)] mb-3">Pinned</p>
+      <div class="flex flex-col">
+        {pinnedRepos.map((repo) => (
+          <a
+            href={repo.url}
+            target="_blank"
+            rel="noreferrer"
+            class="flex items-baseline justify-between gap-4 border-b border-[var(--border-light)] px-2 py-3 transition-colors hover:bg-[var(--bg-hover)]"
+          >
+            <div>
+              <span class="font-display text-[15px] text-[var(--white)]">{repo.name}</span>
+              {repo.language && <span class="font-mono ml-2 text-[10px] text-[var(--text-dim)]">{repo.language}</span>}
+              {repo.description && <p class="text-[13px] leading-[1.65] text-[var(--text-muted)] font-light mt-1">{repo.description}</p>}
+            </div>
+            <span class="font-mono flex-shrink-0 text-[10px] text-[var(--text-dim)]">★ {repo.stars}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  )}
 
   <div class="flex flex-col">
     {projects.map((project) => (
