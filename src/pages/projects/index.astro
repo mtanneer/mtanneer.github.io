@@ -1,13 +1,36 @@
 ---
+import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+
+const projects = (await getCollection('projects')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
 ---
 
 <Layout title="Projects">
   <div class="eyebrow font-mono text-[10px] uppercase tracking-[3px] text-[var(--accent)] mb-4">// projects</div>
-  <h1 class="font-display text-[clamp(30px,5vw,52px)] font-medium leading-tight tracking-tight text-[var(--white)] mb-5">
+  <h1 class="font-display text-[clamp(30px,5vw,52px)] font-medium leading-tight tracking-tight text-[var(--white)] mb-8">
     Projects
   </h1>
-  <p class="text-[16px] leading-[1.88] text-[var(--text-muted)] font-light">
-    Coming in Phase 2.
-  </p>
+
+  <div class="flex flex-col">
+    {projects.map((project) => (
+      <a
+        href={`/projects/${project.id}/`}
+        class="grid grid-cols-[28px_1fr_auto] items-baseline gap-4 rounded-md border-b border-[var(--border-light)] px-2.5 py-4 transition-colors hover:bg-[var(--bg-hover)]"
+      >
+        <span class="text-center text-[16px] text-[var(--accent)]">{project.data.icon}</span>
+        <div>
+          <div class="font-display text-[17px] font-medium text-[var(--white)] mb-1">{project.data.title}</div>
+          <p class="text-[13px] leading-[1.65] text-[var(--text-muted)] font-light">{project.data.description}</p>
+          <div class="flex flex-wrap gap-1.5 mt-2">
+            {project.data.tags.map((tag) => (
+              <span class="font-mono text-[10px] rounded-sm bg-[var(--accent-dim)] px-2 py-0.5 tracking-wide text-[var(--accent-text)]">{tag}</span>
+            ))}
+          </div>
+        </div>
+        <span class="font-mono self-center text-[12px] text-[var(--text-dim)]">→</span>
+      </a>
+    ))}
+  </div>
 </Layout>
