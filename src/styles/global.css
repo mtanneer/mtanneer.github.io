@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@300;400;500&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap');
+@import "tailwindcss";
+
+:root,
+:root[data-theme="dark"] {
+  --bg: #111110;
+  --bg-sidebar: #161614;
+  --bg-card: #1c1c1a;
+  --bg-hover: #222220;
+  --bg-input: #1a1a18;
+  --border: #2a2a27;
+  --border-light: #232320;
+  --accent: #c8a97e;
+  --accent-dim: #c8a97e22;
+  --accent-text: #d4b896;
+  --text: #e8e4dc;
+  --text-muted: #9c9890;
+  --text-dim: #5a5854;
+  --white: #f0ece4;
+  --shadow: rgba(0, 0, 0, 0.45);
+}
+
+:root[data-theme="light"] {
+  --bg: #faf8f4;
+  --bg-sidebar: #f2ede6;
+  --bg-card: #ffffff;
+  --bg-hover: #ede8e0;
+  --bg-input: #f5f1eb;
+  --border: #ddd5c8;
+  --border-light: #e8e0d4;
+  --accent: #8b5e3c;
+  --accent-dim: #8b5e3c1a;
+  --accent-text: #7a4f2e;
+  --text: #2c2820;
+  --text-muted: #6b6258;
+  --text-dim: #aaa099;
+  --white: #1a1510;
+  --shadow: rgba(0, 0, 0, 0.09);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Spectral', Georgia, serif;
+  transition: background .35s ease, color .35s ease;
+}
+
+::selection {
+  background: var(--accent-dim);
+  color: var(--accent);
+}
+
+.font-display {
+  font-family: 'Lora', serif;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}

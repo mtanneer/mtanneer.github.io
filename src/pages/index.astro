@@ -1,0 +1,22 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE } from '../lib/site';
+---
+
+<Layout>
+  <div class="eyebrow font-mono text-[10px] uppercase tracking-[3px] text-[var(--accent)] mb-4">// home</div>
+  <h1 class="font-display text-[clamp(30px,5vw,52px)] font-medium leading-tight tracking-tight text-[var(--white)] mb-5">
+    {SITE.name}
+  </h1>
+  <p class="font-display italic text-[17px] text-[var(--text-muted)] mb-6">
+    {SITE.role} · {SITE.location}
+  </p>
+  <p class="text-[16px] leading-[1.88] text-[var(--text-muted)] font-light">
+    Building at the intersection of hardware and software — computer architecture,
+    digital design, and the occasional side project.
+  </p>
+  <div class="flex flex-wrap gap-2.5 mt-7">
+    <a href="/projects/" class="font-mono text-[12px] rounded-md border border-[var(--border)] bg-[var(--bg-card)] px-3.5 py-2 text-[var(--text-muted)] hover:border-[var(--accent)] hover:text-[var(--accent)] hover:bg-[var(--accent-dim)] transition-colors">Projects →</a>
+    <a href="/about/" class="font-mono text-[12px] rounded-md border border-[var(--border)] bg-[var(--bg-card)] px-3.5 py-2 text-[var(--text-muted)] hover:border-[var(--accent)] hover:text-[var(--accent)] hover:bg-[var(--accent-dim)] transition-colors">About →</a>
+  </div>
+</Layout>
