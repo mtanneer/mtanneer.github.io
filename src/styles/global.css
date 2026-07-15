@@ -1,4 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@300;400;500&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap');
+@import "@fontsource/lora/400.css";
+@import "@fontsource/lora/400-italic.css";
+@import "@fontsource/lora/500.css";
+@import "@fontsource/lora/600.css";
+@import "@fontsource/spectral/300.css";
+@import "@fontsource/spectral/500.css";
+@import "@fontsource/jetbrains-mono/400.css";
 @import "tailwindcss";
 
 :root,
@@ -65,3 +71,9 @@ body {
 .font-mono {
   font-family: 'JetBrains Mono', monospace;
 }
+
+rect.lvl0 { fill: var(--bg-card); }
+rect.lvl1 { fill: color-mix(in srgb, var(--accent) 25%, var(--bg-card)); }
+rect.lvl2 { fill: color-mix(in srgb, var(--accent) 50%, var(--bg-card)); }
+rect.lvl3 { fill: color-mix(in srgb, var(--accent) 75%, var(--bg-card)); }
+rect.lvl4 { fill: var(--accent); }
