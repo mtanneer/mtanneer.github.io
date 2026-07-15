@@ -13,5 +13,9 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
+  build: {
+    inlineStylesheets: 'always'
+  },
+
   integrations: [sitemap()]
 });
