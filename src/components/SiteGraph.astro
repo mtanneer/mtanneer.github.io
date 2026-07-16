@@ -8,13 +8,10 @@ const graph = await buildSiteGraph();
   <svg
     id="site-graph-svg"
     viewBox="0 0 600 320"
-    class="hidden w-full md:block"
+    class="w-full touch-none"
     role="img"
     aria-label="Interactive graph of site pages, projects, and links"
   ></svg>
-  <p class="p-4 text-[12px] text-[var(--text-dim)] md:hidden">
-    Site graph is available on larger screens.
-  </p>
   <script type="application/json" id="site-graph-data" set:html={JSON.stringify(graph)} />
 </div>
 
@@ -65,8 +62,14 @@ const graph = await buildSiteGraph();
       const r = radiusFor(n.kind);
       circle.setAttribute('r', String(r));
       circle.setAttribute('fill', colorFor(n.kind));
-      circle.style.cursor = 'pointer';
+      circle.style.pointerEvents = 'none';
       g.appendChild(circle);
+
+      const hitArea = document.createElementNS(svgNS, 'circle');
+      hitArea.setAttribute('r', '16');
+      hitArea.setAttribute('fill', 'transparent');
+      hitArea.style.cursor = 'pointer';
+      g.appendChild(hitArea);
 
       const label = document.createElementNS(svgNS, 'text');
       label.setAttribute('font-size', '7.5');
@@ -80,7 +83,7 @@ const graph = await buildSiteGraph();
       nodeGroup.appendChild(g);
       nodeEls.set(n.id, { g, node: n });
 
-      circle.addEventListener('click', () => {
+      hitArea.addEventListener('click', () => {
         if (n.external) {
           window.open(n.url, '_blank', 'noopener,noreferrer');
         } else {
@@ -88,18 +91,18 @@ const graph = await buildSiteGraph();
         }
       });
 
-      circle.addEventListener('mouseenter', () => highlight(n.id));
-      circle.addEventListener('mouseleave', () => unhighlight());
+      hitArea.addEventListener('mouseenter', () => highlight(n.id));
+      hitArea.addEventListener('mouseleave', () => unhighlight());
 
       let dragging = false;
-      circle.addEventListener('pointerdown', (ev) => {
+      hitArea.addEventListener('pointerdown', (ev) => {
         dragging = true;
         n.fx = n.x;
         n.fy = n.y;
-        circle.setPointerCapture(ev.pointerId);
+        hitArea.setPointerCapture(ev.pointerId);
         simulation.alphaTarget(0.3).restart();
       });
-      circle.addEventListener('pointermove', (ev) => {
+      hitArea.addEventListener('pointermove', (ev) => {
         if (!dragging) return;
         const rect = svg.getBoundingClientRect();
         const scaleX = width / rect.width;
@@ -112,8 +115,8 @@ const graph = await buildSiteGraph();
         dragging = false;
         simulation.alphaTarget(0);
       };
-      circle.addEventListener('pointerup', stopDrag);
-      circle.addEventListener('pointercancel', stopDrag);
+      hitArea.addEventListener('pointerup', stopDrag);
+      hitArea.addEventListener('pointercancel', stopDrag);
     }
 
     function highlight(id) {
