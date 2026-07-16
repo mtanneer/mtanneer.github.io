@@ -45,14 +45,16 @@ const graph = await buildSiteGraph();
 
     for (const e of edges) {
       const line = document.createElementNS(svgNS, 'line');
-      line.setAttribute('class', 'site-graph-edge');
+      line.setAttribute('stroke', 'var(--border)');
+      line.setAttribute('stroke-width', '1');
       edgeGroup.appendChild(line);
       edgeEls.set(e, line);
     }
 
     const colorFor = (kind) =>
       kind === 'page' ? 'var(--accent)' : kind === 'project' ? 'var(--text)' : 'var(--text-dim)';
-    const radiusFor = (kind) => (kind === 'page' ? 8 : kind === 'project' ? 6 : 4);
+    const radiusFor = (kind) => (kind === 'page' ? 7 : kind === 'project' ? 5 : 3.5);
+    const padding = 24;
 
     for (const n of nodes) {
       const g = document.createElementNS(svgNS, 'g');
@@ -60,23 +62,25 @@ const graph = await buildSiteGraph();
       g.style.cursor = 'pointer';
 
       const circle = document.createElementNS(svgNS, 'circle');
-      circle.setAttribute('r', String(radiusFor(n.kind)));
+      const r = radiusFor(n.kind);
+      circle.setAttribute('r', String(r));
       circle.setAttribute('fill', colorFor(n.kind));
+      circle.style.cursor = 'pointer';
       g.appendChild(circle);
 
       const label = document.createElementNS(svgNS, 'text');
-      label.setAttribute('class', 'site-graph-label');
-      label.setAttribute('font-size', '9');
-      label.setAttribute('dy', '-10');
+      label.setAttribute('font-size', '7.5');
+      label.setAttribute('dy', String(-r - 5));
       label.setAttribute('text-anchor', 'middle');
       label.setAttribute('fill', 'var(--text-muted)');
+      label.style.pointerEvents = 'none';
       label.textContent = n.label;
       g.appendChild(label);
 
       nodeGroup.appendChild(g);
       nodeEls.set(n.id, { g, node: n });
 
-      g.addEventListener('click', () => {
+      circle.addEventListener('click', () => {
         if (n.external) {
           window.open(n.url, '_blank', 'noopener,noreferrer');
         } else {
@@ -84,32 +88,32 @@ const graph = await buildSiteGraph();
         }
       });
 
-      g.addEventListener('mouseenter', () => highlight(n.id));
-      g.addEventListener('mouseleave', () => unhighlight());
+      circle.addEventListener('mouseenter', () => highlight(n.id));
+      circle.addEventListener('mouseleave', () => unhighlight());
 
       let dragging = false;
-      g.addEventListener('pointerdown', (ev) => {
+      circle.addEventListener('pointerdown', (ev) => {
         dragging = true;
         n.fx = n.x;
         n.fy = n.y;
-        g.setPointerCapture(ev.pointerId);
+        circle.setPointerCapture(ev.pointerId);
         simulation.alphaTarget(0.3).restart();
       });
-      g.addEventListener('pointermove', (ev) => {
+      circle.addEventListener('pointermove', (ev) => {
         if (!dragging) return;
         const rect = svg.getBoundingClientRect();
         const scaleX = width / rect.width;
         const scaleY = height / rect.height;
-        n.fx = (ev.clientX - rect.left) * scaleX;
-        n.fy = (ev.clientY - rect.top) * scaleY;
+        n.fx = Math.max(padding, Math.min(width - padding, (ev.clientX - rect.left) * scaleX));
+        n.fy = Math.max(padding, Math.min(height - padding, (ev.clientY - rect.top) * scaleY));
       });
       const stopDrag = () => {
         if (!dragging) return;
         dragging = false;
         simulation.alphaTarget(0);
       };
-      g.addEventListener('pointerup', stopDrag);
-      g.addEventListener('pointercancel', stopDrag);
+      circle.addEventListener('pointerup', stopDrag);
+      circle.addEventListener('pointercancel', stopDrag);
     }
 
     function highlight(id) {
@@ -132,11 +136,15 @@ const graph = await buildSiteGraph();
     }
 
     const simulation = forceSimulation(nodes)
-      .force('link', forceLink(edges).id((d) => d.id).distance(60))
-      .force('charge', forceManyBody().strength(-120))
+      .force('link', forceLink(edges).id((d) => d.id).distance(75))
+      .force('charge', forceManyBody().strength(-160))
       .force('center', forceCenter(width / 2, height / 2))
-      .force('collide', forceCollide(18))
+      .force('collide', forceCollide(28))
       .on('tick', () => {
+        for (const n of nodes) {
+          n.x = Math.max(padding, Math.min(width - padding, n.x));
+          n.y = Math.max(padding, Math.min(height - padding, n.y));
+        }
         for (const e of edges) {
           const line = edgeEls.get(e);
           line.setAttribute('x1', e.source.x);
@@ -156,10 +164,3 @@ const graph = await buildSiteGraph();
     setTimeout(initSiteGraph, 200);
   }
 </script>
-
-<style>
-  .site-graph-edge {
-    stroke: var(--border);
-    stroke-width: 1;
-  }
-</style>
