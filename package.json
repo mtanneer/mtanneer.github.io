@@ -18,6 +18,16 @@
     "@fontsource/spectral": "^5.2.8",
     "@tailwindcss/vite": "^4.3.2",
     "astro": "^7.0.7",
+    "d3-dispatch": "^3.0.1",
+    "d3-force": "^3.0.0",
+    "d3-quadtree": "^3.0.1",
+    "d3-timer": "^3.0.1",
     "tailwindcss": "^4.3.2"
+  },
+  "devDependencies": {
+    "@types/d3-dispatch": "^3.0.7",
+    "@types/d3-force": "^3.0.10",
+    "@types/d3-quadtree": "^3.0.6",
+    "@types/d3-timer": "^3.0.2"
   }
 }

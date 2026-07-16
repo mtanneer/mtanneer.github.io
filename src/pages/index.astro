@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SiteGraph from '../components/SiteGraph.astro';
 import { SITE } from '../lib/site';
 import { fetchGithubStats, fetchContributionCalendar, fetchPinnedRepos } from '../lib/github';
 
@@ -77,4 +78,8 @@ const relativeTime = (iso: string) => {
       </a>
     ))}
   </div>
+
+  <hr class="border-t border-[var(--border)] my-10" />
+  <h2 class="font-display text-[21px] font-medium tracking-tight text-[var(--white)] mb-4">Site graph</h2>
+  <SiteGraph />
 </Layout>

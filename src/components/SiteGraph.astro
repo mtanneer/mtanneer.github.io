@@ -1,0 +1,165 @@
+---
+import { buildSiteGraph } from '../lib/graph';
+
+const graph = await buildSiteGraph();
+---
+
+<div class="site-graph mb-8 overflow-hidden rounded-md border border-[var(--border)] bg-[var(--bg-card)]">
+  <svg
+    id="site-graph-svg"
+    viewBox="0 0 600 320"
+    class="hidden w-full md:block"
+    role="img"
+    aria-label="Interactive graph of site pages, projects, and links"
+  ></svg>
+  <p class="p-4 text-[12px] text-[var(--text-dim)] md:hidden">
+    Site graph is available on larger screens.
+  </p>
+  <script type="application/json" id="site-graph-data" set:html={JSON.stringify(graph)} />
+</div>
+
+<script>
+  import { forceSimulation, forceLink, forceManyBody, forceCenter, forceCollide } from 'd3-force';
+
+  function initSiteGraph() {
+    const svg = document.getElementById('site-graph-svg');
+    if (!svg || svg.dataset.mounted) return;
+    svg.dataset.mounted = 'true';
+
+    const dataEl = document.getElementById('site-graph-data');
+    const graphData = JSON.parse(dataEl.textContent);
+
+    const width = 600;
+    const height = 320;
+    const nodes = graphData.nodes.map((n) => ({ ...n }));
+    const edges = graphData.edges.map((e) => ({ ...e }));
+
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const edgeEls = new Map();
+    const nodeEls = new Map();
+
+    const edgeGroup = document.createElementNS(svgNS, 'g');
+    const nodeGroup = document.createElementNS(svgNS, 'g');
+    svg.appendChild(edgeGroup);
+    svg.appendChild(nodeGroup);
+
+    for (const e of edges) {
+      const line = document.createElementNS(svgNS, 'line');
+      line.setAttribute('class', 'site-graph-edge');
+      edgeGroup.appendChild(line);
+      edgeEls.set(e, line);
+    }
+
+    const colorFor = (kind) =>
+      kind === 'page' ? 'var(--accent)' : kind === 'project' ? 'var(--text)' : 'var(--text-dim)';
+    const radiusFor = (kind) => (kind === 'page' ? 8 : kind === 'project' ? 6 : 4);
+
+    for (const n of nodes) {
+      const g = document.createElementNS(svgNS, 'g');
+      g.setAttribute('class', 'site-graph-node');
+      g.style.cursor = 'pointer';
+
+      const circle = document.createElementNS(svgNS, 'circle');
+      circle.setAttribute('r', String(radiusFor(n.kind)));
+      circle.setAttribute('fill', colorFor(n.kind));
+      g.appendChild(circle);
+
+      const label = document.createElementNS(svgNS, 'text');
+      label.setAttribute('class', 'site-graph-label');
+      label.setAttribute('font-size', '9');
+      label.setAttribute('dy', '-10');
+      label.setAttribute('text-anchor', 'middle');
+      label.setAttribute('fill', 'var(--text-muted)');
+      label.textContent = n.label;
+      g.appendChild(label);
+
+      nodeGroup.appendChild(g);
+      nodeEls.set(n.id, { g, node: n });
+
+      g.addEventListener('click', () => {
+        if (n.external) {
+          window.open(n.url, '_blank', 'noopener,noreferrer');
+        } else {
+          window.location.href = n.url;
+        }
+      });
+
+      g.addEventListener('mouseenter', () => highlight(n.id));
+      g.addEventListener('mouseleave', () => unhighlight());
+
+      let dragging = false;
+      g.addEventListener('pointerdown', (ev) => {
+        dragging = true;
+        n.fx = n.x;
+        n.fy = n.y;
+        g.setPointerCapture(ev.pointerId);
+        simulation.alphaTarget(0.3).restart();
+      });
+      g.addEventListener('pointermove', (ev) => {
+        if (!dragging) return;
+        const rect = svg.getBoundingClientRect();
+        const scaleX = width / rect.width;
+        const scaleY = height / rect.height;
+        n.fx = (ev.clientX - rect.left) * scaleX;
+        n.fy = (ev.clientY - rect.top) * scaleY;
+      });
+      const stopDrag = () => {
+        if (!dragging) return;
+        dragging = false;
+        simulation.alphaTarget(0);
+      };
+      g.addEventListener('pointerup', stopDrag);
+      g.addEventListener('pointercancel', stopDrag);
+    }
+
+    function highlight(id) {
+      const connected = new Set([id]);
+      for (const e of edges) {
+        if (e.source.id === id) connected.add(e.target.id);
+        if (e.target.id === id) connected.add(e.source.id);
+      }
+      for (const [nodeId, { g }] of nodeEls) {
+        g.style.opacity = connected.has(nodeId) ? '1' : '0.25';
+      }
+      for (const [e, line] of edgeEls) {
+        line.style.opacity = connected.has(e.source.id) && connected.has(e.target.id) ? '1' : '0.1';
+      }
+    }
+
+    function unhighlight() {
+      for (const [, { g }] of nodeEls) g.style.opacity = '1';
+      for (const [, line] of edgeEls) line.style.opacity = '1';
+    }
+
+    const simulation = forceSimulation(nodes)
+      .force('link', forceLink(edges).id((d) => d.id).distance(60))
+      .force('charge', forceManyBody().strength(-120))
+      .force('center', forceCenter(width / 2, height / 2))
+      .force('collide', forceCollide(18))
+      .on('tick', () => {
+        for (const e of edges) {
+          const line = edgeEls.get(e);
+          line.setAttribute('x1', e.source.x);
+          line.setAttribute('y1', e.source.y);
+          line.setAttribute('x2', e.target.x);
+          line.setAttribute('y2', e.target.y);
+        }
+        for (const [, { g, node }] of nodeEls) {
+          g.setAttribute('transform', `translate(${node.x}, ${node.y})`);
+        }
+      });
+  }
+
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(initSiteGraph, { timeout: 2000 });
+  } else {
+    setTimeout(initSiteGraph, 200);
+  }
+</script>
+
+<style>
+  .site-graph-edge {
+    stroke: var(--border);
+    stroke-width: 1;
+  }
+</style>
