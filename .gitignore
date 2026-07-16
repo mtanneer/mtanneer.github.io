@@ -6,3 +6,5 @@ dist/
 .astro/
 npm-debug.log*
 .env
+tmp/
+.claude/
