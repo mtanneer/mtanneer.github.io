@@ -57,6 +57,32 @@ export async function fetchDocsRepos(): Promise<DocsRepo[]> {
     .sort((a: DocsRepo, b: DocsRepo) => a.name.localeCompare(b.name));
 }
 
+export interface PublicRepo {
+  name: string;
+  url: string;
+  description: string | null;
+  language: string | null;
+  updatedAt: string;
+}
+
+export async function fetchAllPublicRepos(): Promise<PublicRepo[]> {
+  const res = await fetch(`https://api.github.com/users/${GITHUB_USER}/repos?per_page=100`, {
+    headers: authHeaders(),
+  });
+  const repos = await res.json();
+  if (!Array.isArray(repos)) return [];
+
+  return repos
+    .filter((r: any) => !r.fork)
+    .map((r: any) => ({
+      name: r.name,
+      url: r.html_url,
+      description: r.description,
+      language: r.language,
+      updatedAt: r.updated_at,
+    }));
+}
+
 export async function fetchPinnedRepos(): Promise<RepoStat[]> {
   const query = `
     query($login: String!) {
