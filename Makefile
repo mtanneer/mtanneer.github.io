@@ -1,4 +1,4 @@
-.PHONY: dev build preview test sync sync-diff check-projects clean serve
+.PHONY: dev build preview test test-unit test-e2e sync sync-diff check-projects clean serve
 
 dev:
 	npm run dev
@@ -9,8 +9,13 @@ build:
 preview:
 	npm run preview
 
-test:
+test-unit:
+	npm run test:unit
+
+test-e2e:
 	npm run test:e2e
+
+test: test-unit test-e2e
 
 sync:
 	npm run projects:sync
