@@ -7,9 +7,7 @@ const NAV = [
   { href: '/contact/', label: 'Contact' },
 ];
 
-const PROJECT_PAGES = ['/projects/portfolio-webpage/', '/projects/riscv-core/', '/projects/wordle-clone/'];
-
-const ROUTES = [...NAV.map((n) => n.href), ...PROJECT_PAGES];
+const ROUTES = NAV.map((n) => n.href);
 
 for (const route of ROUTES) {
   test(`${route} loads with no console errors`, async ({ page }) => {

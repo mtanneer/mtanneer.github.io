@@ -1,0 +1,34 @@
+# This file is the single source of truth for what appears on /projects/.
+# Both blocks below use the same rule: include: true required to publish.
+#
+# Auto = GitHub repos, pulled live at build time via REST.
+# New repos are appended here automatically (include: false) by
+# scripts/sync-projects-config.mjs — flip to true to publish.
+#
+# Manual = src/content/projects/*.md entries. The .md file existing is NOT
+# enough to publish it — it must also have include: true here.
+auto:
+  - repo: mtanneer.github.io
+    include: true
+  - repo: frameworks.ml.neural-odes
+    include: true
+  - repo: frameworks.sv.svdoc
+    include: true
+  - repo: homebrew-tools
+    include: false
+  - repo: tools.extensions.vscode.fusesoc
+    include: true
+  - repo: tools.git.git-branch-manager
+    include: true
+  - repo: tools.macos.mac-power-monitor
+    include: true
+  - repo: Wordle-Clone
+    include: true
+manual:
+  - id: portfolio-webpage
+    include: false
+    order: 0
+  - id: riscv-core
+    include: false
+  - id: wordle-clone
+    include: false

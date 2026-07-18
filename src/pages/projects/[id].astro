@@ -1,9 +1,12 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import Tag from '../../components/Tag.astro';
+import { getListedManualIds } from '../../lib/projects';
 
 export async function getStaticPaths() {
-  const projects = await getCollection('projects');
+  const listedIds = await getListedManualIds();
+  const projects = await getCollection('projects', (entry) => listedIds.has(entry.id));
   return projects.map((project) => ({
     params: { id: project.id },
     props: { project },
@@ -21,9 +24,7 @@ const { Content } = await render(project);
     {project.data.icon} {project.data.title}
   </h1>
   <div class="flex flex-wrap gap-1.5 mb-8">
-    {project.data.tags.map((tag) => (
-      <span class="font-mono text-[10px] rounded-sm bg-[var(--accent-dim)] px-2 py-0.5 tracking-wide text-[var(--accent-text)]">{tag}</span>
-    ))}
+    {project.data.tags.map((tag) => <Tag label={tag} />)}
   </div>
   <div class="prose-content text-[16px] leading-[1.9] text-[var(--text-muted)] font-light">
     <Content />
