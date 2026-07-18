@@ -11,6 +11,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "test:e2e": "playwright test",
+    "test:unit": "vitest run",
     "projects:sync": "node scripts/sync-projects-config.mjs"
   },
   "dependencies": {
@@ -33,6 +34,7 @@
     "@types/d3-force": "^3.0.10",
     "@types/d3-quadtree": "^3.0.6",
     "@types/d3-timer": "^3.0.2",
-    "@types/js-yaml": "^4.0.9"
+    "@types/js-yaml": "^4.0.9",
+    "vitest": "^4.1.10"
   }
 }
