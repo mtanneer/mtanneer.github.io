@@ -1,12 +1,11 @@
-# This file is the single source of truth for what appears on /projects/.
-# Both blocks below use the same rule: include: true required to publish.
-#
 # Auto = GitHub repos, pulled live at build time via REST.
+# A repo must be listed here with include: true to appear at all.
 # New repos are appended here automatically (include: false) by
 # scripts/sync-projects-config.mjs — flip to true to publish.
 #
-# Manual = src/content/projects/*.md entries. The .md file existing is NOT
-# enough to publish it — it must also have include: true here.
+# Manual = src/content/projects/*.md entries.
+# Inclusion is governed by each file's own frontmatter (status: draft hides it).
+# Config's only job here is pin state + order.
 auto:
   - repo: mtanneer.github.io
     include: true
@@ -24,6 +23,10 @@ auto:
     include: true
   - repo: Wordle-Clone
     include: true
+  - repo: claude-session-db
+    include: false
+  - repo: sediment
+    include: false
 manual:
   - id: portfolio-webpage
     include: false
