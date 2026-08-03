@@ -27,6 +27,10 @@ auto:
     include: false
   - repo: sediment
     include: false
+  - repo: RipCord
+    include: false
+  - repo: tools.macos.housekeep
+    include: false
 manual:
   - id: portfolio-webpage
     include: false
