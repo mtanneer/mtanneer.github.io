@@ -127,11 +127,17 @@ export interface ContributionCalendar {
   weeks: ContributionDay[][];
 }
 
+export function sixMonthRange(now = new Date()): { from: string; to: string } {
+  const from = new Date(now);
+  from.setUTCMonth(from.getUTCMonth() - 6);
+  return { from: from.toISOString(), to: now.toISOString() };
+}
+
 export async function fetchContributionCalendar(): Promise<ContributionCalendar | null> {
   const query = `
-    query($login: String!) {
+    query($login: String!, $from: DateTime!, $to: DateTime!) {
       user(login: $login) {
-        contributionsCollection {
+        contributionsCollection(from: $from, to: $to) {
           contributionCalendar {
             totalContributions
             weeks {
@@ -147,7 +153,9 @@ export async function fetchContributionCalendar(): Promise<ContributionCalendar 
     }
   `;
 
-  const json = await graphql(query, { login: GITHUB_USER });
+  const { from, to } = sixMonthRange();
+
+  const json = await graphql(query, { login: GITHUB_USER, from, to });
   const calendar = json?.data?.user?.contributionsCollection?.contributionCalendar;
   if (!calendar) return null;
 
