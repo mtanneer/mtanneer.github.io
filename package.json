@@ -12,6 +12,7 @@
     "astro": "astro",
     "test:e2e": "playwright test",
     "test:unit": "vitest run",
+    "test:coverage": "vitest run --coverage",
     "projects:sync": "node scripts/sync-projects-config.mjs"
   },
   "dependencies": {
@@ -35,6 +36,7 @@
     "@types/d3-quadtree": "^3.0.6",
     "@types/d3-timer": "^3.0.2",
     "@types/js-yaml": "^4.0.9",
+    "@vitest/coverage-v8": "^4.1.10",
     "vitest": "^4.1.10"
   }
 }

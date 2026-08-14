@@ -12,3 +12,6 @@ tmp/
 # Playwright
 test-results/
 playwright-report/
+
+# Vitest
+coverage/

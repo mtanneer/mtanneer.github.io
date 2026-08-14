@@ -15,7 +15,7 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npm run test:unit
+      - run: npm run test:coverage
 
   e2e:
     runs-on: ubuntu-latest
