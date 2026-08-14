@@ -3,7 +3,11 @@ name: Test
 on:
   pull_request:
   push:
-    branches-ignore: [main]
+    branches: [main]
+
+concurrency:
+  group: test-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   unit:
