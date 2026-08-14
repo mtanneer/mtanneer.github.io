@@ -1,4 +1,21 @@
-const GITHUB_USER = "mtanneer";
+import {
+  mapDocsRepos,
+  mapPublicRepos,
+  mapPinnedRepos,
+  mapContributionCalendar,
+  mapGithubStats,
+  sixMonthRange,
+  type DocsRepo,
+  type PublicRepo,
+  type RepoStat,
+  type ContributionCalendar,
+  type GithubStats,
+} from './github.pure';
+
+export type { DocsRepo, PublicRepo, RepoStat, ContributionCalendar, ContributionDay, GithubStats } from './github.pure';
+export { sixMonthRange } from './github.pure';
+
+const GITHUB_USER = 'mtanneer';
 
 function authHeaders(): HeadersInit {
   const token = import.meta.env.GITHUB_TOKEN;
@@ -21,66 +38,18 @@ async function graphql(query: string, variables: Record<string, unknown>): Promi
   return res.json();
 }
 
-export interface RepoStat {
-  name: string;
-  url: string;
-  description: string | null;
-  language: string | null;
-  stars: number;
-  updatedAt: string;
-}
-
-export interface GithubStats {
-  publicRepos: number;
-  followers: number;
-  recentRepos: RepoStat[];
-}
-
-export interface DocsRepo {
-  name: string;
-  url: string;
-}
-
 export async function fetchDocsRepos(): Promise<DocsRepo[]> {
   const res = await fetch(`https://api.github.com/users/${GITHUB_USER}/repos?per_page=100`, {
     headers: authHeaders(),
   });
-  const repos = await res.json();
-  if (!Array.isArray(repos)) return [];
-
-  return repos
-    .filter((r: any) => r.has_pages && !r.fork && r.name !== `${GITHUB_USER}.github.io`)
-    .map((r: any) => ({
-      name: r.name,
-      url: `https://${GITHUB_USER}.github.io/${r.name}/`,
-    }))
-    .sort((a: DocsRepo, b: DocsRepo) => a.name.localeCompare(b.name));
-}
-
-export interface PublicRepo {
-  name: string;
-  url: string;
-  description: string | null;
-  language: string | null;
-  updatedAt: string;
+  return mapDocsRepos(await res.json());
 }
 
 export async function fetchAllPublicRepos(): Promise<PublicRepo[]> {
   const res = await fetch(`https://api.github.com/users/${GITHUB_USER}/repos?per_page=100`, {
     headers: authHeaders(),
   });
-  const repos = await res.json();
-  if (!Array.isArray(repos)) return [];
-
-  return repos
-    .filter((r: any) => !r.fork)
-    .map((r: any) => ({
-      name: r.name,
-      url: r.html_url,
-      description: r.description,
-      language: r.language,
-      updatedAt: r.updated_at,
-    }));
+  return mapPublicRepos(await res.json());
 }
 
 export async function fetchPinnedRepos(): Promise<RepoStat[]> {
@@ -104,33 +73,7 @@ export async function fetchPinnedRepos(): Promise<RepoStat[]> {
   `;
 
   const json = await graphql(query, { login: GITHUB_USER });
-  const nodes = json?.data?.user?.pinnedItems?.nodes ?? [];
-
-  return nodes.map((r: any) => ({
-    name: r.name,
-    url: r.url,
-    description: r.description,
-    language: r.primaryLanguage?.name ?? null,
-    stars: r.stargazerCount,
-    updatedAt: r.updatedAt,
-  }));
-}
-
-export interface ContributionDay {
-  date: string;
-  count: number;
-  level: 0 | 1 | 2 | 3 | 4;
-}
-
-export interface ContributionCalendar {
-  totalContributions: number;
-  weeks: ContributionDay[][];
-}
-
-export function sixMonthRange(now = new Date()): { from: string; to: string } {
-  const from = new Date(now);
-  from.setUTCMonth(from.getUTCMonth() - 6);
-  return { from: from.toISOString(), to: now.toISOString() };
+  return mapPinnedRepos(json);
 }
 
 export async function fetchContributionCalendar(): Promise<ContributionCalendar | null> {
@@ -156,27 +99,7 @@ export async function fetchContributionCalendar(): Promise<ContributionCalendar 
   const { from, to } = sixMonthRange();
 
   const json = await graphql(query, { login: GITHUB_USER, from, to });
-  const calendar = json?.data?.user?.contributionsCollection?.contributionCalendar;
-  if (!calendar) return null;
-
-  const levelMap: Record<string, ContributionDay['level']> = {
-    NONE: 0,
-    FIRST_QUARTILE: 1,
-    SECOND_QUARTILE: 2,
-    THIRD_QUARTILE: 3,
-    FOURTH_QUARTILE: 4,
-  };
-
-  return {
-    totalContributions: calendar.totalContributions,
-    weeks: calendar.weeks.map((w: any) =>
-      w.contributionDays.map((d: any) => ({
-        date: d.date,
-        count: d.contributionCount,
-        level: levelMap[d.contributionLevel] ?? 0,
-      }))
-    ),
-  };
+  return mapContributionCalendar(json);
 }
 
 export async function fetchGithubStats(): Promise<GithubStats> {
@@ -189,21 +112,5 @@ export async function fetchGithubStats(): Promise<GithubStats> {
   const user = await userRes.json();
   const repos = await reposRes.json();
 
-  return {
-    publicRepos: user.public_repos ?? 0,
-    followers: user.followers ?? 0,
-    recentRepos: Array.isArray(repos)
-      ? repos
-          .filter((r: any) => !r.fork)
-          .slice(0, 5)
-          .map((r: any) => ({
-            name: r.name,
-            url: r.html_url,
-            description: r.description,
-            language: r.language,
-            stars: r.stargazers_count,
-            updatedAt: r.updated_at,
-          }))
-      : [],
-  };
+  return mapGithubStats(user, repos);
 }

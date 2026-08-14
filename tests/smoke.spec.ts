@@ -24,6 +24,26 @@ for (const route of ROUTES) {
   });
 }
 
+test('project detail page loads with no console errors', async ({ page }) => {
+  await page.goto('/projects/');
+  const detailLink = page.locator('a[href^="/projects/"][href$="/"]').first();
+  const count = await detailLink.count();
+  test.skip(count === 0, 'no manual project currently has include: true in projects.config.yaml');
+
+  const href = await detailLink.getAttribute('href');
+
+  const errors: string[] = [];
+  page.on('console', (msg) => {
+    if (msg.type() === 'error') errors.push(msg.text());
+  });
+  page.on('pageerror', (err) => errors.push(err.message));
+
+  const response = await page.goto(href!);
+  expect(response?.status()).toBe(200);
+  await expect(page).toHaveTitle(/.+/);
+  expect(errors).toEqual([]);
+});
+
 test('nav sidebar has all links and they navigate correctly', async ({ page }) => {
   await page.goto('/');
   for (const item of NAV) {

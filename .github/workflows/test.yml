@@ -3,7 +3,11 @@ name: Test
 on:
   pull_request:
   push:
-    branches-ignore: [main]
+    branches: [main]
+
+concurrency:
+  group: test-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   unit:
@@ -15,7 +19,7 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npm run test:unit
+      - run: npm run test:coverage
 
   e2e:
     runs-on: ubuntu-latest
