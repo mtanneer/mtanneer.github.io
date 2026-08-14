@@ -43,13 +43,13 @@ const relativeTime = (iso: string) => {
   {calendar && (
     <div class="mb-8 overflow-x-auto">
       <p class="font-mono text-[10px] uppercase tracking-widest text-[var(--text-dim)] mb-2">
-        {calendar.totalContributions} contributions in the last year
+        {calendar.totalContributions} contributions in the last 6 months
       </p>
       <svg
         width={calendar.weeks.length * 13 - 3}
         height={7 * 13 - 3}
         role="img"
-        aria-label={`${calendar.totalContributions} contributions in the last year`}
+        aria-label={`${calendar.totalContributions} contributions in the last 6 months`}
       >
         {calendar.weeks.map((week, wi) =>
           week.map((day, di) => (
