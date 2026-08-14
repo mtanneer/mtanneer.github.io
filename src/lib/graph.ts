@@ -1,5 +1,5 @@
-import { getCollection } from 'astro:content';
 import { SITE, NAV } from './site';
+import { getUnifiedProjects } from './projects';
 
 export type NodeKind = 'page' | 'project' | 'external';
 
@@ -22,7 +22,7 @@ export interface GraphData {
 }
 
 export async function buildSiteGraph(): Promise<GraphData> {
-  const projects = await getCollection('projects');
+  const projects = await getUnifiedProjects();
 
   const nodes: GraphNode[] = [];
   const edges: GraphEdge[] = [];
@@ -45,18 +45,13 @@ export async function buildSiteGraph(): Promise<GraphData> {
   edges.push({ source: 'page:/', target: 'page:/contact/' });
 
   for (const project of projects) {
-    const nodeId = `project:${project.id}`;
-    nodes.push({
-      id: nodeId,
-      label: project.data.title,
-      kind: 'project',
-      url: `/projects/${project.id}/`,
-    });
-    edges.push({ source: 'page:/projects/', target: nodeId });
-
-    if (project.data.repoUrl) {
-      const repoId = addExternal(project.data.repoUrl, project.data.title + ' repo');
-      edges.push({ source: nodeId, target: repoId });
+    if (project.hasDetailPage) {
+      const nodeId = `project:${project.id}`;
+      nodes.push({ id: nodeId, label: project.title, kind: 'project', url: project.url });
+      edges.push({ source: 'page:/projects/', target: nodeId });
+    } else {
+      const repoId = addExternal(project.url, project.title);
+      edges.push({ source: 'page:/projects/', target: repoId });
     }
   }
 

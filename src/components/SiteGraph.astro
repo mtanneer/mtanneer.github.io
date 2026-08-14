@@ -4,11 +4,16 @@ import { buildSiteGraph } from '../lib/graph';
 const graph = await buildSiteGraph();
 ---
 
-<div class="site-graph mb-8 overflow-hidden rounded-md border border-[var(--border)] bg-[var(--bg-card)]">
+<div
+  class="site-graph h-full overflow-hidden rounded-md border border-[var(--border)] bg-[var(--bg-card)]"
+  transition:persist
+  transition:name="site-graph"
+>
   <svg
     id="site-graph-svg"
-    viewBox="0 0 600 320"
-    class="w-full touch-none"
+    viewBox="0 0 400 640"
+    class="h-full w-full touch-none"
+    preserveAspectRatio="xMidYMid meet"
     role="img"
     aria-label="Interactive graph of site pages, projects, and links"
   ></svg>
@@ -18,6 +23,24 @@ const graph = await buildSiteGraph();
 <script>
   import { forceSimulation, forceLink, forceManyBody, forceCenter, forceCollide } from 'd3-force';
 
+  let circleByNodeId = null;
+  let currentRingedCircle = null;
+
+  function updateCurrentHighlight(currentPath) {
+    if (!circleByNodeId) return;
+    if (currentRingedCircle) {
+      currentRingedCircle.removeAttribute('stroke');
+      currentRingedCircle.removeAttribute('stroke-width');
+      currentRingedCircle = null;
+    }
+    const circle = circleByNodeId.get(`page:${currentPath}`);
+    if (circle) {
+      circle.setAttribute('stroke', 'var(--accent)');
+      circle.setAttribute('stroke-width', '2');
+      currentRingedCircle = circle;
+    }
+  }
+
   function initSiteGraph() {
     const svg = document.getElementById('site-graph-svg');
     if (!svg || svg.dataset.mounted) return;
@@ -26,8 +49,8 @@ const graph = await buildSiteGraph();
     const dataEl = document.getElementById('site-graph-data');
     const graphData = JSON.parse(dataEl.textContent);
 
-    const width = 600;
-    const height = 320;
+    const width = 400;
+    const height = 640;
     const nodes = graphData.nodes.map((n) => ({ ...n }));
     const edges = graphData.edges.map((e) => ({ ...e }));
 
@@ -53,6 +76,8 @@ const graph = await buildSiteGraph();
     const radiusFor = (kind) => (kind === 'page' ? 7 : kind === 'project' ? 5 : 3.5);
     const padding = 24;
 
+    circleByNodeId = new Map();
+
     for (const n of nodes) {
       const g = document.createElementNS(svgNS, 'g');
       g.setAttribute('class', 'site-graph-node');
@@ -64,6 +89,7 @@ const graph = await buildSiteGraph();
       circle.setAttribute('fill', colorFor(n.kind));
       circle.style.pointerEvents = 'none';
       g.appendChild(circle);
+      circleByNodeId.set(n.id, circle);
 
       const hitArea = document.createElementNS(svgNS, 'circle');
       hitArea.setAttribute('r', '16');
@@ -159,6 +185,8 @@ const graph = await buildSiteGraph();
           g.setAttribute('transform', `translate(${node.x}, ${node.y})`);
         }
       });
+
+    updateCurrentHighlight(window.location.pathname);
   }
 
   if ('requestIdleCallback' in window) {
@@ -166,4 +194,10 @@ const graph = await buildSiteGraph();
   } else {
     setTimeout(initSiteGraph, 200);
   }
+
+  document.addEventListener('astro:page-load', () => {
+    // the graph wrapper is transition:persist'd, so its data-current-path
+    // attribute is frozen at first render — read the live URL instead
+    updateCurrentHighlight(window.location.pathname);
+  });
 </script>

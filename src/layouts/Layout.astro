@@ -1,7 +1,9 @@
 ---
 import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
 import { SITE, NAV } from '../lib/site';
 import { fetchDocsRepos } from '../lib/github';
+import SiteGraph from '../components/SiteGraph.astro';
 import loraBoldWoff2 from '@fontsource/lora/files/lora-latin-600-normal.woff2?url';
 
 interface Props {
@@ -39,6 +41,7 @@ const docsRepos = await fetchDocsRepos();
       const theme = saved ?? 'dark';
       document.documentElement.setAttribute('data-theme', theme);
     </script>
+    <ClientRouter />
   </head>
   <body>
     <div class="flex min-h-screen flex-col md:flex-row">
@@ -109,6 +112,9 @@ const docsRepos = await fetchDocsRepos();
       <main class="max-w-[840px] flex-1 px-5 py-10 md:px-18 md:py-14">
         <slot />
       </main>
+      <aside class="hidden xl:sticky xl:top-0 xl:flex xl:h-screen xl:w-[380px] xl:flex-shrink-0 xl:flex-col xl:border-l xl:border-[var(--border)] xl:p-6">
+        <SiteGraph />
+      </aside>
     </div>
     <script is:inline>
       const btn = document.getElementById('theme-toggle');

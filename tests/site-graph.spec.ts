@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test';
 
+test.use({ viewport: { width: 1440, height: 900 } });
+
 test.beforeEach(async ({ page }) => {
   await page.goto('/');
   // graph mounts via requestIdleCallback/setTimeout(200) — wait for it
