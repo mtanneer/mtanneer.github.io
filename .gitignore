@@ -1,17 +1,3 @@
-.hintrc
-
-# Astro / Node
-node_modules/
-dist/
-.astro/
-npm-debug.log*
 .env
 tmp/
 .claude/
-
-# Playwright
-test-results/
-playwright-report/
-
-# Vitest
-coverage/
