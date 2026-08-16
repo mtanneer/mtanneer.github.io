@@ -1,0 +1,77 @@
+name: Update docs list
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-docs-list
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Regenerate docs list
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 - <<'PYEOF'
+          import json
+          import os
+          import re
+          import subprocess
+
+          out = subprocess.run(
+              ["gh", "api", "users/mtanneer/repos", "--paginate"],
+              check=True, capture_output=True, text=True,
+          ).stdout
+          repos = json.loads(out)
+
+          items = []
+          for repo in sorted(repos, key=lambda r: r["name"]):
+              if not repo.get("has_pages") or repo["name"] == "mtanneer.github.io":
+                  continue
+              url = repo.get("homepage") or f'https://mtanneer.github.io/{repo["name"]}/'
+              desc = (repo.get("description") or "").strip()
+              items.append((repo["name"], url, desc))
+
+          def esc(s):
+              return (s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;"))
+
+          lines = ["  <ul>"]
+          for name, url, desc in items:
+              label = esc(name)
+              suffix = f" — {esc(desc)}" if desc else ""
+              lines.append(f'    <li><a href="{esc(url)}">{label}</a>{suffix}</li>')
+          lines.append("  </ul>")
+          new_list = "\n".join(lines)
+
+          path = "index.html"
+          html = open(path).read()
+          pattern = re.compile(
+              r"(<!-- DOCS-LIST:START -->\n).*?(\n  <!-- DOCS-LIST:END -->)",
+              re.DOTALL,
+          )
+          html, n = pattern.subn(lambda m: m.group(1) + new_list + m.group(2), html)
+          if n != 1:
+              raise SystemExit("DOCS-LIST markers not found in index.html")
+          open(path, "w").write(html)
+          PYEOF
+
+      - name: Commit if changed
+        run: |
+          if git diff --quiet index.html; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -am "Update docs list"
+          git push
