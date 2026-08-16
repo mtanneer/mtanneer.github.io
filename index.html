@@ -4,9 +4,62 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>mtanneer.github.io</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Spectral:wght@300;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #111110;
+      --accent: #c8a97e;
+      --accent-text: #d4b896;
+      --text: #e8e4dc;
+      --text-muted: #9c9890;
+      --border: #2a2a27;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #faf8f4;
+        --accent: #8b5e3c;
+        --accent-text: #7a4f2e;
+        --text: #2c2820;
+        --text-muted: #6b6258;
+        --border: #ddd5c8;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Spectral', Georgia, serif;
+      font-weight: 300;
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+      line-height: 1.6;
+    }
+    h1 {
+      font-family: 'Lora', serif;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+    p { color: var(--text-muted); }
+    ul { list-style: none; padding: 0; margin: 1.5rem 0; }
+    li {
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    a {
+      color: var(--accent-text);
+      text-decoration: none;
+      font-family: 'Lora', serif;
+      font-weight: 500;
+    }
+    a:hover { text-decoration: underline; color: var(--accent); }
+  </style>
 </head>
 <body>
-  <h1>Docs index</h1>
+  <h1>Documentation Index</h1>
   <p>Documentation for a few of my repos:</p>
   <ul>
     <li><a href="https://mtanneer.github.io/frameworks.sv.svdoc/">svdoc</a> — pydoc-style documentation generator for SystemVerilog RTL</li>
